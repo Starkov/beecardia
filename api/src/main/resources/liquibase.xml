@@ -105,14 +105,14 @@
         <addForeignKeyConstraint baseTableName="bc_doctor_patient"
                                  baseColumnNames="id_patient"
                                  constraintName="FK_bc_patients"
-                                 referencedTableName="bc_patient"
+                                 referencedTableName="bc_patients"
                                  referencedColumnNames="id"/>
     </changeSet>
     <changeSet id="04042014-10" author="starkov">
         <addForeignKeyConstraint baseTableName="bc_studies"
                                  baseColumnNames="patient_hash_id"
                                  constraintName="fk_bc_patient"
-                                 referencedTableName="bc_patient"
+                                 referencedTableName="bc_patients"
                                  referencedColumnNames="hash_id"/>
     </changeSet>
 
