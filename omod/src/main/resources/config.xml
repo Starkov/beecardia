@@ -27,11 +27,13 @@
 	</extension>
 	
 	<!-- Maps hibernate file's, if present -->
-	<mappingFiles>
-				
-		Patient.hbm.xml
-				
-	</mappingFiles>
+	<!--<mappingFiles>-->
+		<!--Patient.hbm.xml-->
+	<!--</mappingFiles>-->
+
+    <pakegeswithMapedClass>
+        org.openmrs.module.beecardia
+    </pakegeswithMapedClass>
 
 	<!-- Internationalization -->
 	<!-- All message codes should start with ${project.parent.artifactId}. -->

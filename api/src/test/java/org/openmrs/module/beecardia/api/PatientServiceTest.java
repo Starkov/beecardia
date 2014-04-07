@@ -18,9 +18,7 @@ import org.junit.Test;
 import org.openmrs.api.context.Context;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
 
-/**
- * Tests {@link ${PatientService}}.
- */
+
 public class  PatientServiceTest extends BaseModuleContextSensitiveTest {
 	
 	@Test
