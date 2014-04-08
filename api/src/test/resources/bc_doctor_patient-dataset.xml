@@ -4,6 +4,14 @@
   <bc_doctors id="2" login="Woo"/>
   <bc_doctors id="3" login="Poo"/>
   <bc_doctors id="4" login="Foo"/>
+  <bc_patients id="1" hash_id="hash1" patient_name="Jone" patient_first_name="John" patient_middle_name="middle" patient_last_name="Watson" patient_birth_year="1922"/>
+  <bc_patients id="2" hash_id="hash2" patient_name="Sherlock Holmes" patient_first_name="Sherlock" patient_middle_name="middle" patient_last_name="Holmes" patient_birth_year="1911"/>
+  <bc_patients id="3" hash_id="hash3" patient_name="Bellatrix Lestrange" patient_first_name="Bellatrix" patient_middle_name="middle" patient_last_name="Lestrange" patient_birth_year="1892"/>
+  <bc_patients id="4" hash_id="hash4" patient_name="Harry James Potter" patient_first_name="Harry" patient_middle_name="James" patient_last_name="Potter" patient_birth_year="1985"/>
+  <bc_patients id="5" hash_id="hash5" patient_name="Ronald  Bilius Weasley" patient_first_name="Ronald" patient_middle_name="Bilius" patient_last_name="Weasley" patient_birth_year="1998"/>
+  <bc_patients id="6" hash_id="hash6" patient_name="Hermione Jean Granger" patient_first_name="Hermione" patient_middle_name="Jean" patient_last_name="Granger" patient_birth_year="1956"/>
+  <bc_patients id="7" hash_id="hash7" patient_name="Ginevra Molly Weasley" patient_first_name="Ginevra" patient_middle_name="Molly" patient_last_name="Weasley" patient_birth_year="1987"/>
+  <bc_patients id="8" hash_id="hash8" patient_name="Lucius Malfoy" patient_first_name="Lucius" patient_middle_name="middle" patient_last_name="Malfoy" patient_birth_year="1999"/>
   <bc_doctor_patient id="1" id_doctor="1" id_patient="1"/>
   <bc_doctor_patient id="2" id_doctor="1" id_patient="2"/>
   <bc_doctor_patient id="3" id_doctor="2" id_patient="3"/>
@@ -15,4 +23,20 @@
   <bc_doctor_patient id="9" id_doctor="2" id_patient="1"/>
   <bc_doctor_patient id="10" id_doctor="3" id_patient="1"/>
   <bc_doctor_patient id="11" id_doctor="4" id_patient="1"/>
+  <bc_studies study_hash_id="study1" patient_hash_id="hash1" external_storage="link to John Watson 1"/>
+  <bc_studies study_hash_id="study10" patient_hash_id="hash5" external_storage="link to Ronald  Bilius Weasley 2"/>
+  <bc_studies study_hash_id="study11" patient_hash_id="hash6" external_storage="llink to Hermione Jean Granger 1"/>
+  <bc_studies study_hash_id="study12" patient_hash_id="hash6" external_storage="link to Hermione Jean Granger 2"/>
+  <bc_studies study_hash_id="study13" patient_hash_id="hash7" external_storage="link to Ginevra Molly Weasley 1"/>
+  <bc_studies study_hash_id="study14" patient_hash_id="hash7" external_storage="link to Ginevra Molly Weasley 2"/>
+  <bc_studies study_hash_id="study15" patient_hash_id="hash8" external_storage="link to Lucius Malfoy 1"/>
+  <bc_studies study_hash_id="study16" patient_hash_id="hash8" external_storage="link to Lucius Malfoy 2"/>
+  <bc_studies study_hash_id="study2" patient_hash_id="hash1" external_storage="link to John Watson  2"/>
+  <bc_studies study_hash_id="study3" patient_hash_id="hash2" external_storage="link to Sherlok Holmes 1"/>
+  <bc_studies study_hash_id="study4" patient_hash_id="hash2" external_storage="link to Sherlok Holmes 2"/>
+  <bc_studies study_hash_id="study5" patient_hash_id="hash3" external_storage="link to Bellatrix Lestrange 1"/>
+  <bc_studies study_hash_id="study6" patient_hash_id="hash3" external_storage="link to Bellatrix Lestrange2"/>
+  <bc_studies study_hash_id="study7" patient_hash_id="hash4" external_storage="link to Harry James Potter 1"/>
+  <bc_studies study_hash_id="study8" patient_hash_id="hash4" external_storage="link to Harry James Potter 2"/>
+  <bc_studies study_hash_id="study9" patient_hash_id="hash5" external_storage="link to Ronald  Bilius Weasley 1"/>
 </dataset>

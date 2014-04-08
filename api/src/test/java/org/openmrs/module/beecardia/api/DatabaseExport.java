@@ -5,6 +5,7 @@ import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.database.QueryDataSet;
 import org.dbunit.database.search.TablesDependencyHelper;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatDtdDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 
 import java.io.FileOutputStream;
@@ -38,6 +39,7 @@ public class DatabaseExport {
         String[] patientTable = TablesDependencyHelper.getAllDependentTables(connection, "bc_patients");
         IDataSet patientDataset = connection.createDataSet(patientTable);
         FlatXmlDataSet.write(patientDataset, new FileOutputStream("api/src/test/resources/bc_patients-dataset.xml"));
+
 
         String[] doctorPatientTable = TablesDependencyHelper.getAllDependentTables(connection, "bc_doctor_patient");
         IDataSet doctorPatientDataset = connection.createDataSet(doctorPatientTable);
