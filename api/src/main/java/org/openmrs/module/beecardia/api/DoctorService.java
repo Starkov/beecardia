@@ -14,6 +14,7 @@
 package org.openmrs.module.beecardia.api;
 
 import org.openmrs.api.OpenmrsService;
+import org.openmrs.module.beecardia.Doctor;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -27,10 +28,8 @@ import org.springframework.transaction.annotation.Transactional;
  * @see org.openmrs.api.context.Context
  */
 @Transactional
-public interface StudyService extends OpenmrsService {
-     
-	/*
-	 * Add service methods here
-	 * 
-	 */
+public interface DoctorService extends OpenmrsService {
+
+    Doctor get(long id);
+    void set(Doctor doctor);
 }

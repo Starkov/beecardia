@@ -13,24 +13,16 @@
  */
 package org.openmrs.module.beecardia.api;
 
-import org.openmrs.api.OpenmrsService;
-import org.springframework.transaction.annotation.Transactional;
+import static org.junit.Assert.*;
+import org.junit.Test;
+import org.openmrs.api.context.Context;
+import org.openmrs.test.BaseModuleContextSensitiveTest;
 
-/**
- * This service exposes module's core functionality. It is a Spring managed bean which is configured in moduleApplicationContext.xml.
- * <p>
- * It can be accessed only via Context:<br>
- * <code>
- * Context.getService(PatientService.class).someMethod();
- * </code>
- *
- * @see org.openmrs.api.context.Context
- */
-@Transactional
-public interface StudyService extends OpenmrsService {
-     
-	/*
-	 * Add service methods here
-	 * 
-	 */
+
+public class StudyServiceTest extends BaseModuleContextSensitiveTest {
+
+    @Test
+    public void shouldSetupContext() {
+        assertNotNull(Context.getService(StudyService.class));
+    }
 }

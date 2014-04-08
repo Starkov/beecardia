@@ -13,14 +13,14 @@
  */
 package org.openmrs.module.beecardia.api.db;
 
+import org.openmrs.module.beecardia.Doctor;
 import org.openmrs.module.beecardia.api.PatientService;
 
 /**
  *  Database methods for {@link PatientService}.
  */
-public interface StudyDAO {
-	
-	/*
-	 * Add DAO methods here
-	 */
+public interface DoctorDAO {
+
+    Doctor get(long id);
+    void set(Doctor doctor);
 }

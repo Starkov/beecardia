@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <bc_patients id="1" hash_id="hash1" patient_name="Jone" patient_first_name="John" patient_last_name="Watson" patient_birth_year="1922"/>
+  <bc_patients id="2" hash_id="hash2" patient_name="Sherlock Holmes" patient_first_name="Sherlock" patient_last_name="Holmes" patient_birth_year="1911"/>
+  <bc_patients id="3" hash_id="hash3" patient_name="Bellatrix Lestrange" patient_first_name="Bellatrix" patient_last_name="Lestrange" patient_birth_year="1892"/>
+  <bc_patients id="4" hash_id="hash4" patient_name="Harry James Potter" patient_first_name="Harry" patient_middle_name="James" patient_last_name="Potter" patient_birth_year="1985"/>
+  <bc_patients id="5" hash_id="hash5" patient_name="Ronald  Bilius Weasley" patient_first_name="Ronald" patient_middle_name="Bilius" patient_last_name="Weasley" patient_birth_year="1998"/>
+  <bc_patients id="6" hash_id="hash6" patient_name="Hermione Jean Granger" patient_first_name="Hermione" patient_middle_name="Jean" patient_last_name="Granger" patient_birth_year="1956"/>
+  <bc_patients id="7" hash_id="hash7" patient_name="Ginevra Molly Weasley" patient_first_name="Ginevra" patient_middle_name="Molly" patient_last_name="Weasley" patient_birth_year="1987"/>
+  <bc_patients id="8" hash_id="hash8" patient_name="Lucius Malfoy" patient_first_name="Lucius" patient_last_name="Malfoy" patient_birth_year="1999"/>
+</dataset>

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <bc_doctors id="1" login="Boo"/>
+  <bc_doctors id="2" login="Woo"/>
+  <bc_doctors id="3" login="Poo"/>
+  <bc_doctors id="4" login="Foo"/>
+  <bc_doctor_patient id="1" id_doctor="1" id_patient="1"/>
+  <bc_doctor_patient id="2" id_doctor="1" id_patient="2"/>
+  <bc_doctor_patient id="3" id_doctor="2" id_patient="3"/>
+  <bc_doctor_patient id="4" id_doctor="2" id_patient="4"/>
+  <bc_doctor_patient id="5" id_doctor="3" id_patient="5"/>
+  <bc_doctor_patient id="6" id_doctor="3" id_patient="6"/>
+  <bc_doctor_patient id="7" id_doctor="4" id_patient="7"/>
+  <bc_doctor_patient id="8" id_doctor="4" id_patient="8"/>
+  <bc_doctor_patient id="9" id_doctor="2" id_patient="1"/>
+  <bc_doctor_patient id="10" id_doctor="3" id_patient="1"/>
+  <bc_doctor_patient id="11" id_doctor="4" id_patient="1"/>
+</dataset>

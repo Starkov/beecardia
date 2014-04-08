@@ -1,41 +1,39 @@
+/**
+ * The contents of this file are subject to the OpenMRS Public License
+ * Version 1.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://license.openmrs.org
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ *
+ * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+ */
 package org.openmrs.module.beecardia;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.openmrs.BaseOpenmrsObject;
 
-@Entity
-@Table(name = "bc_studies")
-public class Study {
+import java.io.Serializable;
 
-    @Column(name = "study_hash_id")
-    private String studyHashId;
-    @Column(name = "patient_hash_id")
-    private String patientHashId;
-    @Column(name = "external_storage")
-    private String externalStorage;
+/**
+ * It is a model class. It should extend either {@link org.openmrs.BaseOpenmrsObject} or {@link org.openmrs.BaseOpenmrsMetadata}.
+ */
+public class Study extends BaseOpenmrsObject implements Serializable {
 
-    public void setStudyHashId(String studyHashId) {
-        this.studyHashId = studyHashId;
-    }
-
-    public void setPatientHashId(String patientHashId) {
-        this.patientHashId = patientHashId;
-    }
-
-    public void setExternalStorage(String externalStorage) {
-        this.externalStorage = externalStorage;
-    }
-
-    public String getStudyHashId() {
-        return studyHashId;
-    }
-
-    public String getPatientHashId() {
-        return patientHashId;
-    }
-
-    public String getExternalStorage() {
-        return externalStorage;
-    }
+	private static final long serialVersionUID = 1L;
+	
+	private Integer id;
+	
+	@Override
+	public Integer getId() {
+		return id;
+	}
+	
+	@Override
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 }

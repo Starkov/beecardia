@@ -16,28 +16,43 @@ package org.openmrs.module.beecardia.api.impl;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.module.beecardia.Doctor;
+import org.openmrs.module.beecardia.api.DoctorService;
+import org.openmrs.module.beecardia.api.db.DoctorDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import org.openmrs.module.beecardia.api.StudyService;
-import org.openmrs.module.beecardia.api.db.StudyDAO;
 
-
-public class StudyServiceImpl extends BaseOpenmrsService implements StudyService {
+public class DoctorServiceImpl extends BaseOpenmrsService implements DoctorService {
 
     protected final Log log = LogFactory.getLog(this.getClass());
-
-    private StudyDAO dao;
+    @Autowired
+    private DoctorDAO dao;
 
     /**
      * @param dao the dao to set
      */
-    public void setDao(StudyDAO dao) {
+    public void setDao(DoctorDAO dao) {
         this.dao = dao;
     }
 
-    /**
-     * @return the dao
-     */
-    public StudyDAO getDao() {
-        return dao;
+    @Override
+    public Doctor get(long id) {
+        return dao.get(id);
     }
+
+    @Override
+    public void set(Doctor doctor) {
+       dao.set(doctor);
+    }
+
+
+//
+//    /**
+//     * @return the dao
+//     */
+//    public DoctorDAO getDao() {
+//        return dao;
+//    }
+
+
 }

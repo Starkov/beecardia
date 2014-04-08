@@ -1,53 +1,43 @@
+/**
+ * The contents of this file are subject to the OpenMRS Public License
+ * Version 1.0 (the "License"); you may not use this file except in
+ * compliance with the License. You may obtain a copy of the License at
+ * http://license.openmrs.org
+ *
+ * Software distributed under the License is distributed on an "AS IS"
+ * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+ * License for the specific language governing rights and limitations
+ * under the License.
+ *
+ * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+ */
 package org.openmrs.module.beecardia.api.db.hibernate;
 
-import org.hibernate.Session;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
+import org.openmrs.module.beecardia.api.db.PatientDAO;
 import org.openmrs.module.beecardia.api.db.StudyDAO;
-import org.openmrs.module.beecardia.Study;
 
-import java.util.List;
-
+/**
+ * It is a default implementation of  {@link PatientDAO}.
+ */
 public class StudyDAOImpl implements StudyDAO {
+    protected final Log log = LogFactory.getLog(this.getClass());
 
     private SessionFactory sessionFactory;
 
+    /**
+     * @param sessionFactory the sessionFactory to set
+     */
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * @return the sessionFactory
+     */
     public SessionFactory getSessionFactory() {
         return sessionFactory;
-    }
-
-    @Override
-    public Study getByHashId(String hashId) {
-        Session session = sessionFactory.getCurrentSession();
-        Study study = (Study) session.load(Study.class, hashId);
-        return study;
-    }
-
-    @Override
-    public List<Study> getStudyList() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void save(Study s) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void saveList(List<Study> studies) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void update(Study study) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public void delete(String hashId) {
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 }
