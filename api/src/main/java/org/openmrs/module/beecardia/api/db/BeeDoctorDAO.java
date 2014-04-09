@@ -13,14 +13,18 @@
  */
 package org.openmrs.module.beecardia.api.db;
 
-import org.openmrs.module.beecardia.Doctor;
-import org.openmrs.module.beecardia.api.PatientService;
+import org.openmrs.module.beecardia.BeeDoctor;
+
+import java.util.List;
 
 /**
- *  Database methods for {@link PatientService}.
+ * Database methods for {@link org.openmrs.module.beecardia.api.BeePatientService}.
  */
-public interface DoctorDAO {
+public interface BeeDoctorDAO {
 
-    Doctor get(long id);
-    void set(Doctor doctor);
+    BeeDoctor get(int id);
+
+    void set(BeeDoctor beeDoctor);
+
+    List<BeeDoctor> getAll();
 }

@@ -13,44 +13,50 @@
  */
 package org.openmrs.module.beecardia.api.impl;
 
-import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.module.beecardia.Doctor;
-import org.openmrs.module.beecardia.api.DoctorService;
-import org.openmrs.module.beecardia.api.db.DoctorDAO;
+import org.openmrs.api.impl.BaseOpenmrsService;
+import org.openmrs.module.beecardia.BeeDoctor;
+import org.openmrs.module.beecardia.api.BeeDoctorService;
+import org.openmrs.module.beecardia.api.db.BeeDoctorDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 
-public class DoctorServiceImpl extends BaseOpenmrsService implements DoctorService {
+
+public class BeeDoctorServiceImpl extends BaseOpenmrsService implements BeeDoctorService {
 
     protected final Log log = LogFactory.getLog(this.getClass());
     @Autowired
-    private DoctorDAO dao;
+    private BeeDoctorDAO dao;
 
     /**
      * @param dao the dao to set
      */
-    public void setDao(DoctorDAO dao) {
+    public void setDao(BeeDoctorDAO dao) {
         this.dao = dao;
     }
 
     @Override
-    public Doctor get(long id) {
+    public BeeDoctor get(int id) {
         return dao.get(id);
     }
 
     @Override
-    public void set(Doctor doctor) {
-       dao.set(doctor);
+    public void set(BeeDoctor beeDoctor) {
+        dao.set(beeDoctor);
     }
 
+    @Override
+    public List<BeeDoctor> getAll() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
 
-//
+    //
 //    /**
 //     * @return the dao
 //     */
-//    public DoctorDAO getDao() {
+//    public BeeDoctorDAO getDao() {
 //        return dao;
 //    }
 

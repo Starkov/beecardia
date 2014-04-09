@@ -13,14 +13,15 @@
  */
 package org.openmrs.module.beecardia.api.db;
 
-import org.openmrs.module.beecardia.api.PatientService;
+import org.openmrs.module.beecardia.BeeStudy;
 
 /**
- *  Database methods for {@link PatientService}.
+ * Database methods for {@link org.openmrs.module.beecardia.api.BeePatientService}.
  */
-public interface PatientDAO {
-	
-	/*
-	 * Add DAO methods here
-	 */
+public interface BeeStudyDAO {
+
+    BeeStudy getByHashId(String hash_id);
+
+    void set(BeeStudy beeStudy);
+
 }

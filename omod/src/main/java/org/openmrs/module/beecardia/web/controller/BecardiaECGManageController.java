@@ -16,21 +16,24 @@ package org.openmrs.module.beecardia.web.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.beecardia.BeeDoctor;
+import org.openmrs.module.beecardia.api.BeeDoctorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * The main controller.
  */
 @Controller
-public class  BecardiaECGManageController {
-	
-	protected final Log log = LogFactory.getLog(getClass());
-	
-	@RequestMapping(value = "/module/beecardia/manage", method = RequestMethod.GET)
-	public void manage(ModelMap model) {
-		model.addAttribute("user", Context.getAuthenticatedUser());
-	}
+public class BecardiaECGManageController {
+
+    protected final Log log = LogFactory.getLog(getClass());
+
+    @RequestMapping(value = "/module/beecardia/manage")
+    public void manage(ModelMap model) {
+        BeeDoctor doctor = Context.getService(BeeDoctorService.class).get(1);
+        model.addAttribute("user", Context.getAuthenticatedUser());
+        model.addAttribute("doctor", doctor);
+    }
 }

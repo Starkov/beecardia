@@ -13,34 +13,33 @@
  */
 package org.openmrs.module.beecardia;
 
-import java.io.Serializable;
-
-import org.openmrs.BaseOpenmrsData;
-import org.openmrs.BaseOpenmrsObject;
 import org.openmrs.BaseOpenmrsMetadata;
+import org.openmrs.BaseOpenmrsObject;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * It is a model class. It should extend either {@link BaseOpenmrsObject} or {@link BaseOpenmrsMetadata}.
  */
 @Entity
 @Table(name = "bc_doctors")
-public class Doctor extends BaseOpenmrsObject implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class BeeDoctor extends BaseOpenmrsObject implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "doctor_id")
+    @Column(name = "id", unique = true, nullable = false)
     private int id;
+
     @Column(name = "login")
     private String login;
 
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "bc_doctor_patient",
+            joinColumns = {@JoinColumn(name = "id_patient", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "id", nullable = false, updatable = false)})
+    private List<BeePatient> beePatientList;
 
 
     @Override
@@ -53,7 +52,19 @@ public class Doctor extends BaseOpenmrsObject implements Serializable {
         this.id = id;
     }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public String getLogin() {
         return login;
+    }
+
+    public void setBeePatientList(List<BeePatient> beePatientList) {
+        this.beePatientList = beePatientList;
+    }
+
+    public List<BeePatient> getBeePatientList() {
+        return beePatientList;
     }
 }

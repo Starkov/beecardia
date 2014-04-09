@@ -15,47 +15,40 @@ package org.openmrs.module.beecardia.api.db.hibernate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
-import org.openmrs.module.beecardia.Doctor;
-import org.openmrs.module.beecardia.api.db.DoctorDAO;
+import org.openmrs.module.beecardia.BeePatient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
-
+/**
+ * It is a default implementation of  {@link org.openmrs.module.beecardia.api.db.BeePatientDAO}.
+ */
 @Repository
-public class DoctorDAOImpl implements DoctorDAO {
+public class BeePatientDAOImpl implements org.openmrs.module.beecardia.api.db.BeePatientDAO {
+
     protected final Log log = LogFactory.getLog(this.getClass());
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public Doctor get(long id) {
+    public BeePatient getById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return (Doctor) session.get(Doctor.class, id);
+        return (BeePatient) session.get(BeePatient.class, id);
     }
 
     @Override
-    public void set(Doctor doctor) {
+    public void set(BeePatient beePatient) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(doctor);
+        session.save(beePatient);
     }
 
-//    /**
-//     * @param sessionFactory the sessionFactory to set
-//     */
-//    public void setSessionFactory(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
-//
-//    /**
-//     * @return the sessionFactory
-//     */
-//    public SessionFactory getSessionFactory() {
-//        return sessionFactory;
-//    }
-
-
+    @Override
+    public List<BeePatient> getAll() {
+        Session session = sessionFactory.getCurrentSession();
+        return (List<BeePatient>) session.createQuery("from bc_patients").list();
+    }
 }

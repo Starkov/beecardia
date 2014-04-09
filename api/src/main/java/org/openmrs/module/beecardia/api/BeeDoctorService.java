@@ -14,22 +14,27 @@
 package org.openmrs.module.beecardia.api;
 
 import org.openmrs.api.OpenmrsService;
-import org.openmrs.module.beecardia.Doctor;
+import org.openmrs.module.beecardia.BeeDoctor;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * This service exposes module's core functionality. It is a Spring managed bean which is configured in moduleApplicationContext.xml.
- * <p>
+ * <p/>
  * It can be accessed only via Context:<br>
  * <code>
- * Context.getService(PatientService.class).someMethod();
+ * Context.getService(BeePatientService.class).someMethod();
  * </code>
  *
  * @see org.openmrs.api.context.Context
  */
 @Transactional
-public interface DoctorService extends OpenmrsService {
+public interface BeeDoctorService extends OpenmrsService {
 
-    Doctor get(long id);
-    void set(Doctor doctor);
+    BeeDoctor get(int id);
+
+    void set(BeeDoctor beeDoctor);
+
+    List<BeeDoctor> getAll();
 }

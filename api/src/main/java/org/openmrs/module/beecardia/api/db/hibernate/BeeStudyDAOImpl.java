@@ -15,29 +15,33 @@ package org.openmrs.module.beecardia.api.db.hibernate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.openmrs.module.beecardia.api.db.PatientDAO;
-import org.openmrs.module.beecardia.api.db.StudyDAO;
+import org.openmrs.module.beecardia.BeeStudy;
+import org.openmrs.module.beecardia.api.db.BeeStudyDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
- * It is a default implementation of  {@link PatientDAO}.
+ * It is a default implementation of  {@link org.openmrs.module.beecardia.api.db.BeePatientDAO}.
  */
-public class StudyDAOImpl implements StudyDAO {
+@Component
+public class BeeStudyDAOImpl implements BeeStudyDAO {
     protected final Log log = LogFactory.getLog(this.getClass());
 
+    @Autowired
     private SessionFactory sessionFactory;
 
-    /**
-     * @param sessionFactory the sessionFactory to set
-     */
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+
+    @Override
+    public BeeStudy getByHashId(String hash_id) {
+        Session session = sessionFactory.getCurrentSession();
+        return (BeeStudy) session.createQuery("from bc_study where study_hash_id=" + hash_id);
     }
 
-    /**
-     * @return the sessionFactory
-     */
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
+    @Override
+    public void set(BeeStudy beeStudy) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(beeStudy);
     }
 }

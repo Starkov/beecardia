@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
- 
+
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
     <!--
         See http://www.liquibase.org/manual/home#available_database_refactorings
@@ -10,7 +10,7 @@
     -->
     <changeSet id="04042014" author="starkov">
         <createTable tableName="bc_patients">
-            <column name="id" type="bigint">
+            <column name="id" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="hash_id" type="varchar(255)">
@@ -33,10 +33,10 @@
             </column>
         </createTable>
     </changeSet>
-    
+
     <changeSet id="04042014-1" author="starkov">
         <createTable tableName="bc_doctors">
-            <column name="id" type="bigint" autoIncrement="true">
+            <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="login" type="varchar(45)">
@@ -48,13 +48,13 @@
 
     <changeSet id="04042014-2" author="starkov">
         <createTable tableName="bc_doctor_patient">
-            <column name="id" type="bigint" autoIncrement="true" >
+            <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
-            <column name="id_doctor" type="bigint">
+            <column name="id_doctor" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="id_patient" type="bigint">
+            <column name="id_patient" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
