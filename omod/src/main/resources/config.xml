@@ -31,10 +31,9 @@
     <!--Patient.hbm.xml-->
     <!--</mappingFiles>-->
 
-    <pakegeswithMapedClass>
-        org.openmrs.module.beecardia.BeeDoctor
-        org.openmrs.module.beecardia.BeePatient
-    </pakegeswithMapedClass>
+    <packagesWithMappedClasses>
+        org.openmrs.module.beecardia
+    </packagesWithMappedClasses>
 
     <!-- Internationalization -->
     <!-- All message codes should start with ${project.parent.artifactId}. -->

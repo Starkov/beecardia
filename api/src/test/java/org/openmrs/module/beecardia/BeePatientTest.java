@@ -62,7 +62,7 @@ public class BeePatientTest {
         BeePatient patient = patientDAO.getById(1);
         patient.setName("woo");
         patientDAO.update(patient);
-        assertEquals("foo", patientDAO.getById(1).getName());
+        assertEquals("woo", patientDAO.getById(1).getName());
     }
 
     @Test

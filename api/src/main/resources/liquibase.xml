@@ -10,7 +10,7 @@
     -->
     <changeSet id="04042014" author="starkov">
         <createTable tableName="bc_patients">
-            <column name="id" type="int">
+            <column name="id_patient" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="hash_id" type="varchar(255)">
@@ -36,7 +36,7 @@
 
     <changeSet id="04042014-1" author="starkov">
         <createTable tableName="bc_doctors">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id_doctor" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="login" type="varchar(45)">
@@ -48,14 +48,11 @@
 
     <changeSet id="04042014-2" author="starkov">
         <createTable tableName="bc_doctor_patient">
-            <column name="id" type="int" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" unique="true"/>
-            </column>
             <column name="id_doctor" type="int">
-                <constraints nullable="false"/>
+                <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="id_patient" type="int">
-                <constraints nullable="false"/>
+                <constraints nullable="false" primaryKey="true"/>
             </column>
         </createTable>
     </changeSet>
@@ -75,11 +72,11 @@
     </changeSet>
 
     <changeSet id="04042014-4" author="starkov">
-        <createIndex indexName="bc_hash_id_index" tableName="bc_patients" unique="true">
+        <createIndex tableName="bc_patients" indexName="bc_hash_id_index"  unique="true">
             <column name="hash_id"/>
         </createIndex>
     </changeSet>
-    <changeSet id="04042014-5" author="starkov">
+   <!-- <changeSet id="04042014-5" author="starkov">
         <createIndex tableName="bc_doctor_patient" indexName="bc_doctor_index">
             <column name="id_doctor"></column>
         </createIndex>
@@ -88,7 +85,7 @@
         <createIndex tableName="bc_doctor_patient" indexName="bc_patient_index">
             <column name="id_patient"></column>
         </createIndex>
-    </changeSet>
+    </changeSet>-->
     <changeSet id="04042014-7" author="starkov">
         <createIndex tableName="bc_studies" indexName="bc_patient_hash_id_inx">
             <column name="patient_hash_id"></column>
@@ -99,14 +96,14 @@
                                  baseColumnNames="id_doctor"
                                  constraintName="FK_bc_doctor"
                                  referencedTableName="bc_doctors"
-                                 referencedColumnNames="id"/>
+                                 referencedColumnNames="id_doctor"/>
     </changeSet>
     <changeSet id="04042014-9" author="starkov">
         <addForeignKeyConstraint baseTableName="bc_doctor_patient"
                                  baseColumnNames="id_patient"
                                  constraintName="FK_bc_patients"
                                  referencedTableName="bc_patients"
-                                 referencedColumnNames="id"/>
+                                 referencedColumnNames="id_patient"/>
     </changeSet>
     <changeSet id="04042014-10" author="starkov">
         <addForeignKeyConstraint baseTableName="bc_studies"
