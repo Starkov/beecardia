@@ -36,6 +36,7 @@ public class BeeDoctorDAOImpl implements BeeDoctorDAO {
     public BeeDoctor get(int id) {
         Session session = sessionFactory.getCurrentSession();
         return (BeeDoctor) session.get(BeeDoctor.class, id);
+
     }
 
     @Override
@@ -44,25 +45,31 @@ public class BeeDoctorDAOImpl implements BeeDoctorDAO {
         session.save(beeDoctor);
     }
 
+    public void update(BeeDoctor beeDoctor) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(beeDoctor);
+    }
+
     @Override
     public List<BeeDoctor> getAll() {
         Session session = sessionFactory.getCurrentSession();
         return (List<BeeDoctor>) session.createQuery("from bc_doctors").list();
     }
 
-    //    /**
-//     * @param sessionFactory the sessionFactory to set
-//     */
-//    public void setSessionFactory(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
-//
-//    /**
-//     * @return the sessionFactory
-//     */
-//    public SessionFactory getSessionFactory() {
-//        return sessionFactory;
-//    }
+
+    /**
+     * @param sessionFactory the sessionFactory to set
+     */
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    /**
+     * @return the sessionFactory
+     */
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
 
 }

@@ -28,7 +28,7 @@ import java.util.List;
 public class BeePatient extends BaseOpenmrsObject implements Serializable {
 
     @Id
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id_patient", unique = true, nullable = false)
     private Integer id;
 
     @Column(name = "hash_id")

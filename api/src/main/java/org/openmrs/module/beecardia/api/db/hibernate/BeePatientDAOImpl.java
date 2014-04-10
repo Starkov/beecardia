@@ -34,6 +34,10 @@ public class BeePatientDAOImpl implements org.openmrs.module.beecardia.api.db.Be
     @Autowired
     private SessionFactory sessionFactory;
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public BeePatient getById(int id) {
         Session session = sessionFactory.getCurrentSession();

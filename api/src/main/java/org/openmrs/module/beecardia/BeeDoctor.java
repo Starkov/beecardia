@@ -29,7 +29,7 @@ public class BeeDoctor extends BaseOpenmrsObject implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id_doctor", unique = true, nullable = false)
     private int id;
 
     @Column(name = "login")
@@ -37,8 +37,7 @@ public class BeeDoctor extends BaseOpenmrsObject implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "bc_doctor_patient",
-            joinColumns = {@JoinColumn(name = "id_patient", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "id", nullable = false, updatable = false)})
+            joinColumns = {@JoinColumn(name = "id_doctor")}, inverseJoinColumns = {@JoinColumn(name = "id_patient")})
     private List<BeePatient> beePatientList;
 
 
