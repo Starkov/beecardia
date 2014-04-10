@@ -22,9 +22,15 @@ import java.util.List;
  */
 public interface BeePatientDAO {
 
+    void set(BeePatient beePatient);
+
+    void update(BeePatient beePatient);
+
+    void delete(BeePatient beePatient);
+
     BeePatient getById(int id);
 
-    void set(BeePatient beePatient);
+    BeePatient getByHashId(String hashId);
 
     List<BeePatient> getAll();
 }

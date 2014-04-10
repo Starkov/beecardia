@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.openmrs.module.beecardia.BeePatient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,14 +46,34 @@ public class BeePatientDAOImpl implements org.openmrs.module.beecardia.api.db.Be
     }
 
     @Override
+    public BeePatient getByHashId(String hashId) {
+        Session session = sessionFactory.getCurrentSession();
+        BeePatient result = (BeePatient) session.createCriteria(BeePatient.class)
+                .add(Restrictions.eq("hashId", hashId)).uniqueResult();
+        return result;
+    }
+
+    @Override
     public void set(BeePatient beePatient) {
         Session session = sessionFactory.getCurrentSession();
         session.save(beePatient);
     }
 
     @Override
+    public void update(BeePatient beePatient) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(beePatient);
+    }
+
+    @Override
+    public void delete(BeePatient beePatient) {
+//        Session session = sessionFactory.getCurrentSession();
+//        session.delete(beePatient);
+    }
+
+    @Override
     public List<BeePatient> getAll() {
         Session session = sessionFactory.getCurrentSession();
-        return (List<BeePatient>) session.createQuery("from bc_patients").list();
+        return (List<BeePatient>) session.createQuery("from BeePatient ").list();
     }
 }
