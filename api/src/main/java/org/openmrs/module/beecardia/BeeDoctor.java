@@ -13,6 +13,7 @@
  */
 package org.openmrs.module.beecardia;
 
+import org.hibernate.annotations.ForeignKey;
 import org.openmrs.BaseOpenmrsMetadata;
 import org.openmrs.BaseOpenmrsObject;
 
@@ -38,6 +39,7 @@ public class BeeDoctor extends BaseOpenmrsObject implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "bc_doctor_patient",
             joinColumns = {@JoinColumn(name = "id_doctor")}, inverseJoinColumns = {@JoinColumn(name = "id_patient")})
+    @ForeignKey(name = "FK_bc_doctor", inverseName = "FK_bc_patient")
     private List<BeePatient> beePatientList;
 
 
