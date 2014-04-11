@@ -1,4 +1,4 @@
-package org.openmrs.module.beecardia;
+package org.openmrs.module.beecardia.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;

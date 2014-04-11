@@ -19,8 +19,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.openmrs.module.beecardia.BeeStudy;
 import org.openmrs.module.beecardia.api.db.BeeStudyDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * It is a default implementation of  {@link org.openmrs.module.beecardia.api.db.BeePatientDAO}.
@@ -28,15 +29,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class BeeStudyDAOImpl implements BeeStudyDAO {
     protected final Log log = LogFactory.getLog(this.getClass());
-
-    @Autowired
     private SessionFactory sessionFactory;
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
-    @Override
-    public BeeStudy getByHashId(String hash_id) {
-        Session session = sessionFactory.getCurrentSession();
-        return (BeeStudy) session.createQuery("from bc_study where study_hash_id=" + hash_id);
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 
     @Override
@@ -44,4 +44,29 @@ public class BeeStudyDAOImpl implements BeeStudyDAO {
         Session session = sessionFactory.getCurrentSession();
         session.save(beeStudy);
     }
+
+    @Override
+    public void update(BeeStudy beeStudy) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(beeStudy);
+    }
+
+    @Override
+    public void delete(BeeStudy beeStudy) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(beeStudy);
+    }
+
+    @Override
+    public BeeStudy getById(Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        return (BeeStudy) session.get(BeeStudy.class, id);
+    }
+
+    @Override
+    public List<BeeStudy> getAll() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from BeeStudy").list();
+    }
+
 }

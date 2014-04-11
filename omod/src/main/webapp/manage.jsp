@@ -1,4 +1,3 @@
-
 <%@ include file="/WEB-INF/template/include.jsp" %>
 <%@ include file="/WEB-INF/template/header.jsp" %>
 
@@ -6,6 +5,7 @@
 
 <p>Hello ${user.systemId}!</p></br>
 Doctor: ${doctor.login}
+Patients:
 <table>
 
     <c:forEach items="${doctor.beePatientList}" var="patient">

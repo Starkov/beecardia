@@ -59,8 +59,8 @@
 
     <changeSet id="04042014-3" author="starkov">
         <createTable tableName="bc_studies">
-            <column name="study_hash_id" type="varchar(255)">
-                <constraints nullable="false" primaryKey="true"/>
+            <column name="id_study" type="int)">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="patient_hash_id" type="varchar(255)">
                 <constraints nullable="false"/>
@@ -72,20 +72,11 @@
     </changeSet>
 
     <changeSet id="04042014-4" author="starkov">
-        <createIndex tableName="bc_patients" indexName="bc_hash_id_index"  unique="true">
-            <column name="hash_id"/>
+        <createIndex tableName="bc_patients" indexName="bc_hash_id_index" unique="true">
+            <column name="patient_hash_id"/>
         </createIndex>
     </changeSet>
-   <!-- <changeSet id="04042014-5" author="starkov">
-        <createIndex tableName="bc_doctor_patient" indexName="bc_doctor_index">
-            <column name="id_doctor"></column>
-        </createIndex>
-    </changeSet>
-    <changeSet id="04042014-6" author="starkov">
-        <createIndex tableName="bc_doctor_patient" indexName="bc_patient_index">
-            <column name="id_patient"></column>
-        </createIndex>
-    </changeSet>-->
+
     <changeSet id="04042014-7" author="starkov">
         <createIndex tableName="bc_studies" indexName="bc_patient_hash_id_inx">
             <column name="patient_hash_id"></column>
@@ -96,21 +87,27 @@
                                  baseColumnNames="id_doctor"
                                  constraintName="FK_bc_doctor"
                                  referencedTableName="bc_doctors"
-                                 referencedColumnNames="id_doctor"/>
+                                 referencedColumnNames="id_doctor"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
     </changeSet>
     <changeSet id="04042014-9" author="starkov">
         <addForeignKeyConstraint baseTableName="bc_doctor_patient"
                                  baseColumnNames="id_patient"
                                  constraintName="FK_bc_patients"
                                  referencedTableName="bc_patients"
-                                 referencedColumnNames="id_patient"/>
+                                 referencedColumnNames="id_patient"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
     </changeSet>
     <changeSet id="04042014-10" author="starkov">
         <addForeignKeyConstraint baseTableName="bc_studies"
                                  baseColumnNames="patient_hash_id"
                                  constraintName="fk_bc_patient"
                                  referencedTableName="bc_patients"
-                                 referencedColumnNames="hash_id"/>
+                                 referencedColumnNames="patient_hash_id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
     </changeSet>
 
 </databaseChangeLog>

@@ -1,16 +1,18 @@
-package org.openmrs.module.beecardia;
+package org.openmrs.module.beecardia.api.db.hibernate;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openmrs.module.beecardia.api.db.hibernate.BeePatientDAOImpl;
+import org.openmrs.module.beecardia.BeePatient;
+import org.openmrs.module.beecardia.util.HibernateUtil;
 
+import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class BeePatientTest {
+public class BeePatientDAOTest {
     private SessionFactory sessionFactory;
     private Transaction tx;
     private BeePatientDAOImpl patientDAO;
@@ -48,7 +50,7 @@ public class BeePatientTest {
     @Test
     public void setPatient() {
         BeePatient patient = new BeePatient();
-        patient.setId(3);
+        patient.setId(4);
         patient.setHashId("3patientHash");
         patient.setName("Pasichnik Sergey");
         patient.setFirstName("Sergey");
@@ -67,8 +69,8 @@ public class BeePatientTest {
 
     @Test
     public void deletePatient() {
-//        BeePatient patient = patientDAO.getById(1);
-//        patientDAO.delete(patient);
-//        assertNull(patientDAO.getById(1));
+        BeePatient patient = patientDAO.getById(2);
+        patientDAO.delete(patient);
+        assertNull(patientDAO.getById(2));
     }
 }

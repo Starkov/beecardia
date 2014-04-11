@@ -26,31 +26,21 @@ import java.io.Serializable;
 @Table(name = "bc_studies")
 public class BeeStudy extends BaseOpenmrsObject implements Serializable {
 
-
-    private Integer id;
     @Id
-    @Column(name = "study_hash_id", unique = true, nullable = false)
-    private String studyHashId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hash_id", nullable = false)
-    private BeePatient beePatient;
+    @GeneratedValue
+    @Column(name = "id_study", unique = true, nullable = false)
+    private Integer id;
 
     @Column(name = "external_storage")
     private String externalStorage;
 
-    @Override
-    public Integer getId() {
-        return id;
-    }
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = BeePatient.class)
+    @JoinColumn(name = "patient_hash_id", referencedColumnName = "patient_hash_id", nullable = false)
+    private BeePatient beePatient;
 
     @Override
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public void setStudyHashId(String studyHashId) {
-        this.studyHashId = studyHashId;
     }
 
     public void setBeePatient(BeePatient beePatient) {
@@ -61,8 +51,9 @@ public class BeeStudy extends BaseOpenmrsObject implements Serializable {
         this.externalStorage = externalStorage;
     }
 
-    public String getStudyHashId() {
-        return studyHashId;
+    @Override
+    public Integer getId() {
+        return id;
     }
 
     public BeePatient getBeePatient() {

@@ -19,7 +19,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.module.beecardia.BeePatient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -31,8 +30,6 @@ import java.util.List;
 public class BeePatientDAOImpl implements org.openmrs.module.beecardia.api.db.BeePatientDAO {
 
     protected final Log log = LogFactory.getLog(this.getClass());
-
-    @Autowired
     private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
@@ -67,8 +64,8 @@ public class BeePatientDAOImpl implements org.openmrs.module.beecardia.api.db.Be
 
     @Override
     public void delete(BeePatient beePatient) {
-//        Session session = sessionFactory.getCurrentSession();
-//        session.delete(beePatient);
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(beePatient);
     }
 
     @Override

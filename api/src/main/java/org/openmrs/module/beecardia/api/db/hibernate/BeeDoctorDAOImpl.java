@@ -19,7 +19,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.openmrs.module.beecardia.BeeDoctor;
 import org.openmrs.module.beecardia.api.db.BeeDoctorDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,15 +27,12 @@ import java.util.List;
 @Repository
 public class BeeDoctorDAOImpl implements BeeDoctorDAO {
     protected final Log log = LogFactory.getLog(this.getClass());
-
-    @Autowired
     private SessionFactory sessionFactory;
 
     @Override
     public BeeDoctor get(int id) {
         Session session = sessionFactory.getCurrentSession();
         return (BeeDoctor) session.get(BeeDoctor.class, id);
-
     }
 
     @Override

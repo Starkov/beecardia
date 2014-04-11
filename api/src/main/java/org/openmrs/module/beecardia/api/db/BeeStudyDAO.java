@@ -15,13 +15,21 @@ package org.openmrs.module.beecardia.api.db;
 
 import org.openmrs.module.beecardia.BeeStudy;
 
+import java.util.List;
+
 /**
  * Database methods for {@link org.openmrs.module.beecardia.api.BeePatientService}.
  */
 public interface BeeStudyDAO {
 
-    BeeStudy getByHashId(String hash_id);
-
     void set(BeeStudy beeStudy);
+
+    void update(BeeStudy beeStudy);
+
+    void delete(BeeStudy beeStudy);
+
+    BeeStudy getById(Integer id);
+
+    List<BeeStudy> getAll();
 
 }

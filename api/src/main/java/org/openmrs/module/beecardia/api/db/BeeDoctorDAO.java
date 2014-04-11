@@ -22,9 +22,10 @@ import java.util.List;
  */
 public interface BeeDoctorDAO {
 
-    BeeDoctor get(int id);
 
     void set(BeeDoctor beeDoctor);
+
+    BeeDoctor get(int id);
 
     List<BeeDoctor> getAll();
 }

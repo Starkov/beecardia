@@ -31,7 +31,7 @@ public class BeeStudyServiceImpl extends BaseOpenmrsService implements BeeStudyS
 
     @Override
     public BeeStudy getByHashId(String hash_id) {
-        dao.getByHashId(hash_id);
+
         return null;
     }
 

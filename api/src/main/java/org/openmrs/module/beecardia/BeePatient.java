@@ -13,6 +13,7 @@
  */
 package org.openmrs.module.beecardia;
 
+import org.hibernate.annotations.Cascade;
 import org.openmrs.BaseOpenmrsMetadata;
 import org.openmrs.BaseOpenmrsObject;
 
@@ -31,7 +32,7 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
     @Column(name = "id_patient", unique = true, nullable = false)
     private Integer id;
 
-    @Column(name = "hash_id")
+    @Column(name = "patient_hash_id")
     private String hashId;
 
     @Column(name = "patient_name")
@@ -53,6 +54,7 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
     private List<BeeDoctor> beeDoctorList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "beePatient")
+    @Cascade(value = org.hibernate.annotations.CascadeType.REPLICATE)
     private List<BeeStudy> beeStudyList;
 
     @Override

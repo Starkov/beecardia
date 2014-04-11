@@ -1,11 +1,13 @@
-package org.openmrs.module.beecardia;
+package org.openmrs.module.beecardia.api.db.hibernate;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openmrs.module.beecardia.api.db.hibernate.BeeDoctorDAOImpl;
+import org.openmrs.module.beecardia.BeeDoctor;
+import org.openmrs.module.beecardia.BeePatient;
+import org.openmrs.module.beecardia.util.HibernateUtil;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 
-public class BeeDoctorTest {
+public class BeeDoctorDAOTest {
     private SessionFactory sessionFactory;
     private Transaction tx;
     private BeeDoctorDAOImpl doctorDAO;
