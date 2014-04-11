@@ -47,6 +47,12 @@ public class BeeDoctorDAOImpl implements BeeDoctorDAO {
     }
 
     @Override
+    public void delete(BeeDoctor beeDoctor) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(beeDoctor);
+    }
+
+    @Override
     public List<BeeDoctor> getAll() {
         Session session = sessionFactory.getCurrentSession();
         return (List<BeeDoctor>) session.createQuery("from bc_doctors").list();

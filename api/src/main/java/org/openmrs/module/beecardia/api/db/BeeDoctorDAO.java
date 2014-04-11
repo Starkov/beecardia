@@ -25,6 +25,10 @@ public interface BeeDoctorDAO {
 
     void set(BeeDoctor beeDoctor);
 
+    void update(BeeDoctor beeDoctor);
+
+    void delete(BeeDoctor beeDoctor);
+
     BeeDoctor get(int id);
 
     List<BeeDoctor> getAll();

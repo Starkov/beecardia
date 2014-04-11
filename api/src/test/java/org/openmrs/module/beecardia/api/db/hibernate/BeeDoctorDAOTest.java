@@ -11,8 +11,7 @@ import org.openmrs.module.beecardia.util.HibernateUtil;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 
 public class BeeDoctorDAOTest {
@@ -66,6 +65,20 @@ public class BeeDoctorDAOTest {
 
         doctorDAO.update(doctor);
         assertNotNull(doctorDAO.get(1).getBeePatientList());
+    }
+
+    @Test
+    public void updateDoctor() {
+        BeeDoctor doctor = doctorDAO.get(1);
+        doctor.setLogin("www");
+        doctorDAO.update(doctor);
+        assertEquals("www", doctorDAO.get(1).getLogin());
+    }
+
+    @Test
+    public void deleteDoctor() {
+        doctorDAO.delete(doctorDAO.get(1));
+        assertNull(doctorDAO.get(1));
     }
 
 }
