@@ -14,17 +14,12 @@
 package org.openmrs.module.beecardia;
 
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.ForeignKey;
-import org.openmrs.BaseOpenmrsMetadata;
 import org.openmrs.BaseOpenmrsObject;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * It is a model class. It should extend either {@link BaseOpenmrsObject} or {@link BaseOpenmrsMetadata}.
- */
 @Entity
 @Table(name = "bc_patients")
 public class BeePatient extends BaseOpenmrsObject implements Serializable {
@@ -56,7 +51,6 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "beePatient")
     @Cascade(value = org.hibernate.annotations.CascadeType.REPLICATE)
-    @ForeignKey(name = "FK_bc_patient", inverseName = "FK_bc_doctor")
     private List<BeeStudy> beeStudyList;
 
     @Override

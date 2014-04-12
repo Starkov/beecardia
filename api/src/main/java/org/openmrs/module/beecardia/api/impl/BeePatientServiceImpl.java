@@ -19,19 +19,17 @@ import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.beecardia.BeePatient;
 import org.openmrs.module.beecardia.api.BeePatientService;
 import org.openmrs.module.beecardia.api.db.BeePatientDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * It is a default implementation of {@link org.openmrs.module.beecardia.api.BeePatientService}.
- */
 public class BeePatientServiceImpl extends BaseOpenmrsService implements BeePatientService {
 
     protected final Log log = LogFactory.getLog(this.getClass());
-
-    @Autowired(required = true)
     private BeePatientDAO dao;
+
+    public void setDao(BeePatientDAO dao) {
+        this.dao = dao;
+    }
 
     @Override
     public BeePatient getById(int id) {
@@ -39,8 +37,23 @@ public class BeePatientServiceImpl extends BaseOpenmrsService implements BeePati
     }
 
     @Override
+    public BeePatient getByHashId(String hashId) {
+        return dao.getByHashId(hashId);
+    }
+
+    @Override
     public void set(BeePatient beePatient) {
         dao.set(beePatient);
+    }
+
+    @Override
+    public void update(BeePatient beePatient) {
+        dao.update(beePatient);
+    }
+
+    @Override
+    public void delete(BeePatient beePatient) {
+        dao.delete(beePatient);
     }
 
     @Override

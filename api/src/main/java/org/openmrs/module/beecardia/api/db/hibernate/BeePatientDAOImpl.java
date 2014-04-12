@@ -23,9 +23,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * It is a default implementation of  {@link org.openmrs.module.beecardia.api.db.BeePatientDAO}.
- */
 @Repository
 public class BeePatientDAOImpl implements org.openmrs.module.beecardia.api.db.BeePatientDAO {
 

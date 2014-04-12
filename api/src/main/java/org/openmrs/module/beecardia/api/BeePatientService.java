@@ -19,22 +19,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * This service exposes module's core functionality. It is a Spring managed bean which is configured in moduleApplicationContext.xml.
- * <p/>
- * It can be accessed only via Context:<br>
- * <code>
- * Context.getService(BeePatientService.class).someMethod();
- * </code>
- *
- * @see org.openmrs.api.context.Context
- */
 @Transactional
 public interface BeePatientService extends OpenmrsService {
 
+    void set(BeePatient beePatient);
+
+    void update(BeePatient beePatient);
+
+    void delete(BeePatient beePatient);
+
     BeePatient getById(int id);
 
-    void set(BeePatient beePatient);
+    BeePatient getByHashId(String hashId);
 
     List<BeePatient> getAll();
 }

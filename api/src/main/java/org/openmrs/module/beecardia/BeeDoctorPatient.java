@@ -7,11 +7,8 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Tolik
- * Date: 11.04.14
- * Time: 16:56
- * To change this template use File | Settings | File Templates.
+ * THIS CLASS IS ONLY FOR A TESTS
+ * bc_docotrs many-to-many bc_patients
  */
 @Entity
 @Table(name = "bc_doctor_patient")

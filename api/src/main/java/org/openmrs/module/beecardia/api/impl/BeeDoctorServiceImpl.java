@@ -19,7 +19,6 @@ import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.beecardia.BeeDoctor;
 import org.openmrs.module.beecardia.api.BeeDoctorService;
 import org.openmrs.module.beecardia.api.db.BeeDoctorDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -27,12 +26,8 @@ import java.util.List;
 public class BeeDoctorServiceImpl extends BaseOpenmrsService implements BeeDoctorService {
 
     protected final Log log = LogFactory.getLog(this.getClass());
-    @Autowired
     private BeeDoctorDAO dao;
 
-    /**
-     * @param dao the dao to set
-     */
     public void setDao(BeeDoctorDAO dao) {
         this.dao = dao;
     }
@@ -48,17 +43,18 @@ public class BeeDoctorServiceImpl extends BaseOpenmrsService implements BeeDocto
     }
 
     @Override
-    public List<BeeDoctor> getAll() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public void update(BeeDoctor beeDoctor) {
+        dao.update(beeDoctor);
     }
 
-    //
-//    /**
-//     * @return the dao
-//     */
-//    public BeeDoctorDAO getDao() {
-//        return dao;
-//    }
+    @Override
+    public void delete(BeeDoctor beeDoctor) {
+        dao.delete(beeDoctor);
+    }
 
+    @Override
+    public List<BeeDoctor> getAll() {
+        return dao.getAll();
+    }
 
 }

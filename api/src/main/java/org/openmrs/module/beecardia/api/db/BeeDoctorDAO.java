@@ -17,11 +17,7 @@ import org.openmrs.module.beecardia.BeeDoctor;
 
 import java.util.List;
 
-/**
- * Database methods for {@link org.openmrs.module.beecardia.api.BeePatientService}.
- */
 public interface BeeDoctorDAO {
-
 
     void set(BeeDoctor beeDoctor);
 

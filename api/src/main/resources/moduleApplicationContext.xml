@@ -11,103 +11,87 @@
                 <bean
                         class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
                     <property name="transactionManager">
-                        <ref bean="transactionManager" />
+                        <ref bean="transactionManager"/>
                     </property>
                     <property name="target">
                         <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.BeeDoctorServiceImpl">
                             <property name="dao">
                                 <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.db.hibernate.BeeDoctorDAOImpl">
                                     <property name="sessionFactory">
-                                        <ref bean="sessionFactory" />
+                                        <ref bean="sessionFactory"/>
                                     </property>
                                 </bean>
                             </property>
                         </bean>
                     </property>
                     <property name="preInterceptors">
-                        <ref bean="serviceInterceptors" />
+                        <ref bean="serviceInterceptors"/>
                     </property>
                     <property name="transactionAttributeSource">
-                        <ref bean="transactionAttributeSource" />
+                        <ref bean="transactionAttributeSource"/>
                     </property>
                 </bean>
             </list>
         </property>
     </bean>
-
-    <bean id="beePatientService"
-          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager">
-            <ref bean="transactionManager"/>
-        </property>
-        <property name="target">
-            <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.BeePatientServiceImpl"/>
-        </property>
-        <property name="preInterceptors">
-            <ref bean="serviceInterceptors"/>
-        </property>
-        <property name="transactionAttributeSource">
-            <ref bean="transactionAttributeSource"/>
-        </property>
-    </bean>
-
     <bean parent="serviceContext">
         <property name="moduleService">
-            <list merge="true">
+            <list>
                 <value>${project.parent.groupId}.${project.parent.artifactId}.api.BeePatientService</value>
-                <ref local="beePatientService"/>
+                <bean
+                        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+                    <property name="transactionManager">
+                        <ref bean="transactionManager"/>
+                    </property>
+                    <property name="target">
+                        <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.BeePatientServiceImpl">
+                            <property name="dao">
+                                <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.db.hibernate.BeePatientDAOImpl">
+                                    <property name="sessionFactory">
+                                        <ref bean="sessionFactory"/>
+                                    </property>
+                                </bean>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="preInterceptors">
+                        <ref bean="serviceInterceptors"/>
+                    </property>
+                    <property name="transactionAttributeSource">
+                        <ref bean="transactionAttributeSource"/>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
-
-    <!--<bean id="beeDoctorService"
-          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager">
-            <ref bean="transactionManager"/>
-        </property>
-        <property name="target">
-            <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.BeeDoctorServiceImpl"/>
-        </property>
-        <property name="preInterceptors">
-            <ref bean="serviceInterceptors"/>
-        </property>
-        <property name="transactionAttributeSource">
-            <ref bean="transactionAttributeSource"/>
-        </property>
-    </bean>
-
     <bean parent="serviceContext">
         <property name="moduleService">
-            <list merge="true">
-                <value>${project.parent.groupId}.${project.parent.artifactId}.api.BeeDoctorService</value>
-                <ref local="beeDoctorService"/>
-            </list>
-        </property>
-    </bean>-->
-
-    <bean id="beeStudyService"
-          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager">
-            <ref bean="transactionManager"/>
-        </property>
-        <property name="target">
-            <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.BeeStudyServiceImpl"/>
-        </property>
-        <property name="preInterceptors">
-            <ref bean="serviceInterceptors"/>
-        </property>
-        <property name="transactionAttributeSource">
-            <ref bean="transactionAttributeSource"/>
-        </property>
-    </bean>
-
-    <bean parent="serviceContext">
-        <property name="moduleService">
-            <list merge="true">
+            <list>
                 <value>${project.parent.groupId}.${project.parent.artifactId}.api.BeeStudyService</value>
-                <ref local="beeStudyService"/>
+                <bean
+                        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+                    <property name="transactionManager">
+                        <ref bean="transactionManager"/>
+                    </property>
+                    <property name="target">
+                        <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.BeeStudyServiceImpl">
+                            <property name="dao">
+                                <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.db.hibernate.BeeStudyDAOImpl">
+                                    <property name="sessionFactory">
+                                        <ref bean="sessionFactory"/>
+                                    </property>
+                                </bean>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="preInterceptors">
+                        <ref bean="serviceInterceptors"/>
+                    </property>
+                    <property name="transactionAttributeSource">
+                        <ref bean="transactionAttributeSource"/>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
-
 </beans>

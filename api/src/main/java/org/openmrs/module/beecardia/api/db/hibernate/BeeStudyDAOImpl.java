@@ -19,15 +19,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.openmrs.module.beecardia.BeeStudy;
 import org.openmrs.module.beecardia.api.db.BeeStudyDAO;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * It is a default implementation of  {@link org.openmrs.module.beecardia.api.db.BeePatientDAO}.
- */
-@Component
+@Repository
 public class BeeStudyDAOImpl implements BeeStudyDAO {
+
     protected final Log log = LogFactory.getLog(this.getClass());
     private SessionFactory sessionFactory;
 

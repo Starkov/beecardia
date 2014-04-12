@@ -1,50 +1,46 @@
 package org.openmrs.module.beecardia.api.db.hibernate;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.beecardia.BeeDoctor;
 import org.openmrs.module.beecardia.BeePatient;
-import org.openmrs.module.beecardia.util.HibernateUtil;
+import org.openmrs.module.beecardia.api.BeeDoctorService;
+import org.openmrs.test.BaseModuleContextSensitiveTest;
 
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 
-public class BeeDoctorDAOTest {
-    private SessionFactory sessionFactory;
-    private Transaction tx;
-    private BeeDoctorDAOImpl doctorDAO;
+public class BeeDoctorDAOTest extends BaseModuleContextSensitiveTest {
+
+    private BeeDoctorService doctorService;
 
     @Before
-    public void setupDB() {
-        sessionFactory = HibernateUtil.getSessionFactory();
-        tx = sessionFactory.getCurrentSession().beginTransaction();
-        doctorDAO = new BeeDoctorDAOImpl();
-        doctorDAO.setSessionFactory(sessionFactory);
+    public void setupDB() throws Exception {
+        executeDataSet("api/src/test/resources/dataset/beecardia-dataset.xml");
+        doctorService = Context.getService(BeeDoctorService.class);
     }
 
-    @After
-    public void shotdownDB() {
-        tx.rollback();
+    @Test
+    public void getBeeDoctorService() {
+        assertNotNull(Context.getService(BeeDoctorService.class));
     }
 
     @Test
     public void getBeeDoctor() {
-        assertNotNull(doctorDAO.get(1));
+        assertNotNull(doctorService.get(1));
     }
 
     @Test
     public void compareDoctorLogin() {
-        assertEquals("Doc first", doctorDAO.get(1).getLogin());
+        assertEquals("Doc first", doctorService.get(1).getLogin());
     }
 
     @Test
     public void getPatientsOfDoctor() {
-        assertNotNull(doctorDAO.get(1).getBeePatientList());
+        assertNotNull(doctorService.get(1).getBeePatientList());
     }
 
 
@@ -57,28 +53,28 @@ public class BeeDoctorDAOTest {
         patient.setFirstName("Sergey");
         patient.setLastName("Pasichnik");
 
-        BeeDoctor doctor = doctorDAO.get(1);
+        BeeDoctor doctor = doctorService.get(1);
         List<BeePatient> patientList = doctor.getBeePatientList();
 
         patientList.add(patient);
         doctor.setBeePatientList(patientList);
 
-        doctorDAO.update(doctor);
-        assertNotNull(doctorDAO.get(1).getBeePatientList());
+        doctorService.update(doctor);
+        assertNotNull(doctorService.get(1).getBeePatientList());
     }
 
     @Test
     public void updateDoctor() {
-        BeeDoctor doctor = doctorDAO.get(1);
+        BeeDoctor doctor = doctorService.get(1);
         doctor.setLogin("www");
-        doctorDAO.update(doctor);
-        assertEquals("www", doctorDAO.get(1).getLogin());
+        doctorService.update(doctor);
+        assertEquals("www", doctorService.get(1).getLogin());
     }
 
     @Test
     public void deleteDoctor() {
-        doctorDAO.delete(doctorDAO.get(1));
-        assertNull(doctorDAO.get(1));
+        doctorService.delete(doctorService.get(1));
+        assertNull(doctorService.get(1));
     }
 
 }

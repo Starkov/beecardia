@@ -19,24 +19,40 @@ import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.beecardia.BeeStudy;
 import org.openmrs.module.beecardia.api.BeeStudyService;
 import org.openmrs.module.beecardia.api.db.BeeStudyDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 
 public class BeeStudyServiceImpl extends BaseOpenmrsService implements BeeStudyService {
 
     protected final Log log = LogFactory.getLog(this.getClass());
-
-    @Autowired(required = true)
     private BeeStudyDAO dao;
 
-    @Override
-    public BeeStudy getByHashId(String hash_id) {
-
-        return null;
+    public void setDao(BeeStudyDAO dao) {
+        this.dao = dao;
     }
 
     @Override
     public void set(BeeStudy beeStudy) {
         dao.set(beeStudy);
+    }
+
+    @Override
+    public void update(BeeStudy beeStudy) {
+        dao.update(beeStudy);
+    }
+
+    @Override
+    public void delete(BeeStudy beeStudy) {
+        dao.delete(beeStudy);
+    }
+
+    @Override
+    public BeeStudy getById(Integer id) {
+        return dao.getById(id);
+    }
+
+    @Override
+    public List<BeeStudy> getAll() {
+        return dao.getAll();
     }
 }

@@ -17,9 +17,6 @@ import org.openmrs.module.beecardia.BeeStudy;
 
 import java.util.List;
 
-/**
- * Database methods for {@link org.openmrs.module.beecardia.api.BeePatientService}.
- */
 public interface BeeStudyDAO {
 
     void set(BeeStudy beeStudy);

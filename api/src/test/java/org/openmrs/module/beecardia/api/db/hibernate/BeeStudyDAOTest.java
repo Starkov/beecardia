@@ -1,74 +1,63 @@
 package org.openmrs.module.beecardia.api.db.hibernate;
 
 
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.beecardia.BeePatient;
 import org.openmrs.module.beecardia.BeeStudy;
-import org.openmrs.module.beecardia.util.HibernateUtil;
+import org.openmrs.module.beecardia.api.BeePatientService;
+import org.openmrs.module.beecardia.api.BeeStudyService;
+import org.openmrs.test.BaseModuleContextSensitiveTest;
 
 import static junit.framework.Assert.*;
 
-public class BeeStudyDAOTest {
+public class BeeStudyDAOTest extends BaseModuleContextSensitiveTest {
 
-    private SessionFactory sessionFactory;
-    private Transaction tx;
-    private BeeStudyDAOImpl studyDAO;
+    private BeeStudyService studyService;
 
     @Before
-    public void setupDB() {
-        sessionFactory = HibernateUtil.getSessionFactory();
-        tx = sessionFactory.getCurrentSession().beginTransaction();
-        studyDAO = new BeeStudyDAOImpl();
-        studyDAO.setSessionFactory(sessionFactory);
-    }
-
-    @After
-    public void shotdownDB() {
-        tx.rollback();
-//        tx.commit();
+    public void setupDB() throws Exception {
+        executeDataSet("api/src/test/resources/dataset/beecardia-dataset.xml");
+        studyService = Context.getService(BeeStudyService.class);
     }
 
     @Test
     public void getById() {
-        assertNotNull(studyDAO.getById(1));
+        assertNotNull(studyService.getById(1));
     }
 
     @Test
     public void saveStudy() {
-        BeePatientDAOImpl patientDAO = new BeePatientDAOImpl();
-        patientDAO.setSessionFactory(sessionFactory);
-        BeePatient patient = patientDAO.getById(1);
+        BeePatientService patientService = Context.getService(BeePatientService.class);
+        BeePatient patient = patientService.getById(1);
 
         BeeStudy study = new BeeStudy();
         study.setId(10);
         study.setBeePatient(patient);
         study.setExternalStorage("link to study 3");
 
-        studyDAO.set(study);
-        assertNotNull(studyDAO.getById(10));
+        studyService.set(study);
+        assertNotNull(studyService.getById(10));
     }
 
     @Test
     public void updateStydy() {
-        BeeStudy study = studyDAO.getById(1);
+        BeeStudy study = studyService.getById(1);
         study.setExternalStorage("link");
-        studyDAO.update(study);
+        studyService.update(study);
 
-        assertEquals("link", studyDAO.getById(1).getExternalStorage());
+        assertEquals("link", studyService.getById(1).getExternalStorage());
     }
 
     @Test
     public void deleteStudy() {
-        studyDAO.delete(studyDAO.getById(10));
-        assertNull(studyDAO.getById(10));
+        studyService.delete(studyService.getById(10));
+        assertNull(studyService.getById(10));
     }
 
     @Test
     public void getAllStudies() {
-        assertNotNull(studyDAO.getAll());
+        assertNotNull(studyService.getAll());
     }
 }

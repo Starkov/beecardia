@@ -23,11 +23,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 @Repository
 public class BeeDoctorDAOImpl implements BeeDoctorDAO {
     protected final Log log = LogFactory.getLog(this.getClass());
     private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public BeeDoctor get(int id) {
@@ -57,21 +60,4 @@ public class BeeDoctorDAOImpl implements BeeDoctorDAO {
         Session session = sessionFactory.getCurrentSession();
         return (List<BeeDoctor>) session.createQuery("from bc_doctors").list();
     }
-
-
-    /**
-     * @param sessionFactory the sessionFactory to set
-     */
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    /**
-     * @return the sessionFactory
-     */
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-
 }

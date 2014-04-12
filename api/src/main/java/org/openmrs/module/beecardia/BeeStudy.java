@@ -18,10 +18,6 @@ import org.openmrs.BaseOpenmrsObject;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * It is a model class. It should extend either {@link org.openmrs.BaseOpenmrsObject} or {@link org.openmrs.BaseOpenmrsMetadata}.
- */
-
 @Entity
 @Table(name = "bc_studies")
 public class BeeStudy extends BaseOpenmrsObject implements Serializable {
