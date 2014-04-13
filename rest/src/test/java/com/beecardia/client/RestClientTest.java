@@ -1,6 +1,5 @@
 package com.beecardia.client;
 
-import com.beecardia.client.api.*;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertNotNull;

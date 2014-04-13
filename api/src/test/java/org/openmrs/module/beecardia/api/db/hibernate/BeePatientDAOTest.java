@@ -33,7 +33,10 @@ public class BeePatientDAOTest extends BaseModuleContextSensitiveTest {
 
     @Test
     public void getAllPatient() {
-        assertNotNull(patientService.getAll());
+        for (BeePatient patient : patientService.getAll()) {
+            System.out.println(patient.getName());
+        }
+        assertNotNull(patientService.getAll().get(0));
     }
 
     @Test
