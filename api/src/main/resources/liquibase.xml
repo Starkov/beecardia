@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
- 
+
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
-    <!--
-        See http://www.liquibase.org/manual/home#available_database_refactorings
-        for a list of supported elements and attributes
-    -->
+
     <changeSet id="04042014" author="starkov">
         <createTable tableName="bc_patients">
-            <column name="id" type="bigint">
+            <column name="id_patient" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="hash_id" type="varchar(255)">
@@ -33,10 +30,10 @@
             </column>
         </createTable>
     </changeSet>
-    
+
     <changeSet id="04042014-1" author="starkov">
         <createTable tableName="bc_doctors">
-            <column name="id" type="bigint" autoIncrement="true">
+            <column name="id_doctor" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="login" type="varchar(45)">
@@ -48,22 +45,19 @@
 
     <changeSet id="04042014-2" author="starkov">
         <createTable tableName="bc_doctor_patient">
-            <column name="id" type="bigint" autoIncrement="true" >
-                <constraints nullable="false" primaryKey="true" unique="true"/>
+            <column name="id_doctor" type="int">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="id_doctor" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id_patient" type="bigint">
-                <constraints nullable="false"/>
+            <column name="id_patient" type="int">
+                <constraints nullable="false" primaryKey="true"/>
             </column>
         </createTable>
     </changeSet>
 
     <changeSet id="04042014-3" author="starkov">
         <createTable tableName="bc_studies">
-            <column name="study_hash_id" type="varchar(255)">
-                <constraints nullable="false" primaryKey="true"/>
+            <column name="id_study" type="int)">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="patient_hash_id" type="varchar(255)">
                 <constraints nullable="false"/>
@@ -75,20 +69,11 @@
     </changeSet>
 
     <changeSet id="04042014-4" author="starkov">
-        <createIndex indexName="bc_hash_id_index" tableName="bc_patients" unique="true">
-            <column name="hash_id"/>
+        <createIndex tableName="bc_patients" indexName="bc_hash_id_index" unique="true">
+            <column name="patient_hash_id"/>
         </createIndex>
     </changeSet>
-    <changeSet id="04042014-5" author="starkov">
-        <createIndex tableName="bc_doctor_patient" indexName="bc_doctor_index">
-            <column name="id_doctor"></column>
-        </createIndex>
-    </changeSet>
-    <changeSet id="04042014-6" author="starkov">
-        <createIndex tableName="bc_doctor_patient" indexName="bc_patient_index">
-            <column name="id_patient"></column>
-        </createIndex>
-    </changeSet>
+
     <changeSet id="04042014-7" author="starkov">
         <createIndex tableName="bc_studies" indexName="bc_patient_hash_id_inx">
             <column name="patient_hash_id"></column>
@@ -99,21 +84,27 @@
                                  baseColumnNames="id_doctor"
                                  constraintName="FK_bc_doctor"
                                  referencedTableName="bc_doctors"
-                                 referencedColumnNames="id"/>
+                                 referencedColumnNames="id_doctor"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
     </changeSet>
     <changeSet id="04042014-9" author="starkov">
         <addForeignKeyConstraint baseTableName="bc_doctor_patient"
                                  baseColumnNames="id_patient"
                                  constraintName="FK_bc_patients"
                                  referencedTableName="bc_patients"
-                                 referencedColumnNames="id"/>
+                                 referencedColumnNames="id_patient"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
     </changeSet>
     <changeSet id="04042014-10" author="starkov">
         <addForeignKeyConstraint baseTableName="bc_studies"
                                  baseColumnNames="patient_hash_id"
                                  constraintName="fk_bc_patient"
                                  referencedTableName="bc_patients"
-                                 referencedColumnNames="hash_id"/>
+                                 referencedColumnNames="patient_hash_id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
     </changeSet>
 
 </databaseChangeLog>
