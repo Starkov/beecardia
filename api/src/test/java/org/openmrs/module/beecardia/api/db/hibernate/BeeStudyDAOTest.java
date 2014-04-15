@@ -18,7 +18,7 @@ public class BeeStudyDAOTest extends BaseModuleContextSensitiveTest {
 
     @Before
     public void setupDB() throws Exception {
-        executeDataSet("api/src/test/resources/dataset/beecardia-dataset.xml");
+        executeDataSet("dataset/beecardia-dataset.xml");
         studyService = Context.getService(BeeStudyService.class);
     }
 
@@ -30,15 +30,17 @@ public class BeeStudyDAOTest extends BaseModuleContextSensitiveTest {
     @Test
     public void saveStudy() {
         BeePatientService patientService = Context.getService(BeePatientService.class);
-        BeePatient patient = patientService.getById(1);
+        BeePatient patient = patientService.getById(3);
 
         BeeStudy study = new BeeStudy();
-        study.setId(10);
+        study.setId(11);
+        study.setStudyHashId("6studyHash");
         study.setBeePatient(patient);
         study.setExternalStorage("link to study 3");
 
-        studyService.set(study);
-        assertNotNull(studyService.getById(10));
+        studyService.save(study);
+        assertNotNull(studyService.getById(11));
+        assertEquals("link to study 3", patientService.getById(3).getBeeStudyList().get(0).getExternalStorage());
     }
 
     @Test

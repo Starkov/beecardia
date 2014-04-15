@@ -27,7 +27,10 @@ public class BeeStudy extends BaseOpenmrsObject implements Serializable {
     @Column(name = "id_study", unique = true, nullable = false)
     private Integer id;
 
-    @Column(name = "external_storage")
+    @Column(name = "study_hash_id", nullable = false)
+    private String studyHashId;
+
+    @Column(name = "external_storage", nullable = false)
     private String externalStorage;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = BeePatient.class)
@@ -37,6 +40,10 @@ public class BeeStudy extends BaseOpenmrsObject implements Serializable {
     @Override
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public void setStudyHashId(String studyHashId) {
+        this.studyHashId = studyHashId;
     }
 
     public void setBeePatient(BeePatient beePatient) {
@@ -50,6 +57,10 @@ public class BeeStudy extends BaseOpenmrsObject implements Serializable {
     @Override
     public Integer getId() {
         return id;
+    }
+
+    public String getStudyHashId() {
+        return studyHashId;
     }
 
     public BeePatient getBeePatient() {

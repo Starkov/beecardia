@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Restrictions;
 import org.openmrs.module.beecardia.BeeDoctor;
 import org.openmrs.module.beecardia.api.db.BeeDoctorDAO;
 import org.springframework.stereotype.Repository;
@@ -39,7 +40,15 @@ public class BeeDoctorDAOImpl implements BeeDoctorDAO {
     }
 
     @Override
-    public void set(BeeDoctor beeDoctor) {
+    public BeeDoctor getByLogin(String login) {
+        Session session = sessionFactory.getCurrentSession();
+        BeeDoctor doctor = (BeeDoctor) session.createCriteria(BeeDoctor.class)
+                .add(Restrictions.eq("login", login)).uniqueResult();
+        return doctor;
+    }
+
+    @Override
+    public void save(BeeDoctor beeDoctor) {
         Session session = sessionFactory.getCurrentSession();
         session.save(beeDoctor);
     }

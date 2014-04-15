@@ -1,8 +1,10 @@
 package org.openmrs.module.beecardia.api.db.hibernate;
 
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.beecardia.BeeDoctor;
 import org.openmrs.module.beecardia.BeePatient;
 import org.openmrs.module.beecardia.api.BeePatientService;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
@@ -17,7 +19,7 @@ public class BeePatientDAOTest extends BaseModuleContextSensitiveTest {
 
     @Before
     public void setupDB() throws Exception {
-        executeDataSet("api/src/test/resources/dataset/beecardia-dataset.xml");
+        executeDataSet("dataset/beecardia-dataset.xml");
         patientService = Context.getService(BeePatientService.class);
     }
 
@@ -43,12 +45,15 @@ public class BeePatientDAOTest extends BaseModuleContextSensitiveTest {
     public void setPatient() {
         BeePatient patient = new BeePatient();
         patient.setId(4);
-        patient.setHashId("3patientHash");
+        patient.setPatientHashId("4patientHash");
         patient.setName("Pasichnik Sergey");
         patient.setFirstName("Sergey");
         patient.setLastName("Pasichnik");
-        patientService.set(patient);
-        assertNotNull(patientService.getById(3));
+        BeeDoctor doctor = new BeeDoctor();
+        doctor.setLogin("test");
+        patient.getBeeDoctorList().add(doctor);
+        patientService.save(patient);
+        assertNotNull(patientService.getById(4));
     }
 
     @Test
@@ -65,4 +70,12 @@ public class BeePatientDAOTest extends BaseModuleContextSensitiveTest {
         patientService.delete(patient);
         assertNull(patientService.getById(2));
     }
+
+    @Test
+    public void getDoctorList() {
+        BeePatient patient = patientService.getById(1);
+        Assert.assertNotNull(patient.getBeeDoctorList());
+    }
+
+
 }

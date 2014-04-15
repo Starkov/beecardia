@@ -325,7 +325,7 @@ public class BeeServiceAPI {
                         study.setCreatorHashId(jp.getText());
                     } else if ("patient_hash_id".equals(fieldName)) {
                         study.setPatientHashId(jp.getText());
-                    } else if ("external_storage".equals(fieldName)) {
+                    } else if ("link".equals(fieldName)) {
                         study.setExternalStorage(jp.getText());
                     } else if ("start_time".equals(fieldName)) {
                         study.setStartTime(DateTimeUtils.gmtStringToDate(jp.getText()));

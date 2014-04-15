@@ -17,6 +17,7 @@ import org.openmrs.BaseOpenmrsObject;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -33,8 +34,9 @@ public class BeeDoctor extends BaseOpenmrsObject implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "bc_doctor_patient",
-            joinColumns = {@JoinColumn(name = "id_doctor")}, inverseJoinColumns = {@JoinColumn(name = "id_patient")})
-    private List<BeePatient> beePatientList;
+            joinColumns = {@JoinColumn(name = "id_doctor", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "id_patient", nullable = false, updatable = false)})
+    private List<BeePatient> beePatientList = new LinkedList<BeePatient>();
 
 
     @Override

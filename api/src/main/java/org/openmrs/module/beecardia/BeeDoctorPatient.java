@@ -20,4 +20,19 @@ public class BeeDoctorPatient implements Serializable {
     @Column(name = "id_patient")
     private int idPatient;
 
+    public void setIdDocotr(int idDocotr) {
+        this.idDocotr = idDocotr;
+    }
+
+    public void setIdPatient(int idPatient) {
+        this.idPatient = idPatient;
+    }
+
+    public int getIdDocotr() {
+        return idDocotr;
+    }
+
+    public int getIdPatient() {
+        return idPatient;
+    }
 }

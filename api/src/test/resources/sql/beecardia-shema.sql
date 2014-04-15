@@ -36,6 +36,7 @@ CREATE TABLE `bc_doctor_patient` (
   DEFAULT CHARSET =utf8;
 CREATE TABLE `bc_studies` (
   `id_study`         INT(11)      NOT NULL AUTO_INCREMENT,
+  `study_hash_id`    VARCHAR(255) NOT NULL,
   `patient_hash_id`  VARCHAR(255) NOT NULL,
   `external_storage` VARCHAR(45)  NOT NULL,
   PRIMARY KEY (`id_study`),

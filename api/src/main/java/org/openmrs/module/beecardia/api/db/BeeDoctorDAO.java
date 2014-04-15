@@ -19,13 +19,15 @@ import java.util.List;
 
 public interface BeeDoctorDAO {
 
-    void set(BeeDoctor beeDoctor);
+    void save(BeeDoctor beeDoctor);
 
     void update(BeeDoctor beeDoctor);
 
     void delete(BeeDoctor beeDoctor);
 
     BeeDoctor get(int id);
+
+    BeeDoctor getByLogin(String login);
 
     List<BeeDoctor> getAll();
 }

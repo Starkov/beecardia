@@ -18,6 +18,7 @@ import org.openmrs.BaseOpenmrsObject;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -25,11 +26,12 @@ import java.util.List;
 public class BeePatient extends BaseOpenmrsObject implements Serializable {
 
     @Id
+    @GeneratedValue
     @Column(name = "id_patient", unique = true, nullable = false)
     private Integer id;
 
     @Column(name = "patient_hash_id")
-    private String hashId;
+    private String patientHashId;
 
     @Column(name = "patient_name")
     private String name;
@@ -44,10 +46,10 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
     private String lastName;
 
     @Column(name = "patient_birth_year")
-    private int birthDay;
+    private int birthYear;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "beePatientList")
-    private List<BeeDoctor> beeDoctorList;
+    private List<BeeDoctor> beeDoctorList = new LinkedList<BeeDoctor>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "beePatient")
     @Cascade(value = org.hibernate.annotations.CascadeType.REPLICATE)
@@ -63,8 +65,8 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
         this.id = id;
     }
 
-    public void setHashId(String hashId) {
-        this.hashId = hashId;
+    public void setPatientHashId(String patientHashId) {
+        this.patientHashId = patientHashId;
     }
 
     public void setName(String name) {
@@ -83,8 +85,8 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
         this.lastName = lastName;
     }
 
-    public void setBirthDay(int birthDay) {
-        this.birthDay = birthDay;
+    public void setBirthYear(int birthYear) {
+        this.birthYear = birthYear;
     }
 
     public void setBeeDoctorList(List<BeeDoctor> beeDoctorList) {
@@ -95,8 +97,8 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
         this.beeStudyList = beeStudyList;
     }
 
-    public String getHashId() {
-        return hashId;
+    public String getPatientHashId() {
+        return patientHashId;
     }
 
     public String getName() {
@@ -115,8 +117,8 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
         return lastName;
     }
 
-    public int getBirthDay() {
-        return birthDay;
+    public int getBirthYear() {
+        return birthYear;
     }
 
     public List<BeeDoctor> getBeeDoctorList() {

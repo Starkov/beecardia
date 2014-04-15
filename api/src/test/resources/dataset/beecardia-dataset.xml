@@ -12,9 +12,14 @@
     <bc_doctor_patient id_doctor="1" id_patient="2"/>
     <bc_doctor_patient id_doctor="2" id_patient="1"/>
     <bc_doctor_patient id_doctor="2" id_patient="2"/>
-    <bc_studies id_study="1" patient_hash_id="1patientHash" external_storage="link to study 1"/>
-    <bc_studies id_study="2" patient_hash_id="1patientHash" external_storage="link to study 2"/>
-    <bc_studies id_study="3" patient_hash_id="2patientHash" external_storage="link to study1"/>
-    <bc_studies id_study="9" patient_hash_id="1patientHash" external_storage="link to study 3"/>
-    <bc_studies id_study="10" patient_hash_id="1patientHash" external_storage="link to study 3"/>
+    <bc_studies id_study="1" study_hash_id="1studyHash" patient_hash_id="1patientHash"
+                external_storage="link to study 1"/>
+    <bc_studies id_study="2" study_hash_id="2studyHash" patient_hash_id="1patientHash"
+                external_storage="link to study 2"/>
+    <bc_studies id_study="3" study_hash_id="3studyHash" patient_hash_id="2patientHash"
+                external_storage="link to study1"/>
+    <bc_studies id_study="9" study_hash_id="4studyHash" patient_hash_id="1patientHash"
+                external_storage="link to study 3"/>
+    <bc_studies id_study="10" study_hash_id="5studyHash" patient_hash_id="1patientHash"
+                external_storage="link to study 3"/>
 </dataset>

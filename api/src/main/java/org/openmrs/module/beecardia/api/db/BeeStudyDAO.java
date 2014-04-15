@@ -19,7 +19,7 @@ import java.util.List;
 
 public interface BeeStudyDAO {
 
-    void set(BeeStudy beeStudy);
+    void save(BeeStudy beeStudy);
 
     void update(BeeStudy beeStudy);
 

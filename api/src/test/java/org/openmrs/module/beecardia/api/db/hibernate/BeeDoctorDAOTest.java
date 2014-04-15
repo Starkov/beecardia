@@ -6,6 +6,7 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.beecardia.BeeDoctor;
 import org.openmrs.module.beecardia.BeePatient;
 import org.openmrs.module.beecardia.api.BeeDoctorService;
+import org.openmrs.module.beecardia.api.BeePatientService;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class BeeDoctorDAOTest extends BaseModuleContextSensitiveTest {
 
     @Before
     public void setupDB() throws Exception {
-        executeDataSet("api/src/test/resources/dataset/beecardia-dataset.xml");
+        executeDataSet("dataset/beecardia-dataset.xml");
         doctorService = Context.getService(BeeDoctorService.class);
     }
 
@@ -31,6 +32,11 @@ public class BeeDoctorDAOTest extends BaseModuleContextSensitiveTest {
     @Test
     public void getBeeDoctor() {
         assertNotNull(doctorService.get(1));
+    }
+
+    @Test
+    public void getDoctorByLogin() {
+        assertNotNull(doctorService.getByLogin("Doc first"));
     }
 
     @Test
@@ -48,7 +54,7 @@ public class BeeDoctorDAOTest extends BaseModuleContextSensitiveTest {
     public void savePatientOfDoctor() {
         BeePatient patient = new BeePatient();
         patient.setId(3);
-        patient.setHashId("3patientHash");
+        patient.setPatientHashId("3patientHash");
         patient.setName("Pasichnik Sergey");
         patient.setFirstName("Sergey");
         patient.setLastName("Pasichnik");
@@ -75,6 +81,34 @@ public class BeeDoctorDAOTest extends BaseModuleContextSensitiveTest {
     public void deleteDoctor() {
         doctorService.delete(doctorService.get(1));
         assertNull(doctorService.get(1));
+    }
+
+    @Test
+    public void addPatientsToDoctor() {
+        BeePatient patient1 = new BeePatient();
+        BeePatient patient2 = new BeePatient();
+
+        patient1.setId(111);
+        patient1.setPatientHashId("1");
+        patient2.setId(222);
+        patient2.setPatientHashId("2");
+
+        BeeDoctor doctor = new BeeDoctor();
+        doctor.setId(777);
+        doctor.setLogin("777");
+        doctor.getBeePatientList().add(patient1);
+        doctor.getBeePatientList().add(patient2);
+        doctorService.save(doctor);
+
+        BeeDoctor d = doctorService.getByLogin("777");
+        System.out.println(d.getId() + " " + d.getLogin());
+        List<BeePatient> patients = doctorService.getByLogin("777").getBeePatientList();
+        for (BeePatient p : patients) {
+            System.out.println(p.getId() + " " + p.getPatientHashId());
+        }
+        assertNotNull(patients);
+        assertNotNull(Context.getService(BeePatientService.class).getById(111).getBeeDoctorList());
+
     }
 
 }

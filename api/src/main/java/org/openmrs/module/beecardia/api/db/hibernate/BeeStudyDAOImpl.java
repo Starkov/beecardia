@@ -38,7 +38,7 @@ public class BeeStudyDAOImpl implements BeeStudyDAO {
     }
 
     @Override
-    public void set(BeeStudy beeStudy) {
+    public void save(BeeStudy beeStudy) {
         Session session = sessionFactory.getCurrentSession();
         session.save(beeStudy);
     }

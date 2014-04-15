@@ -21,7 +21,8 @@ import java.util.List;
 
 @Transactional
 public interface BeeStudyService extends OpenmrsService {
-    void set(BeeStudy beeStudy);
+
+    void save(BeeStudy beeStudy);
 
     void update(BeeStudy beeStudy);
 

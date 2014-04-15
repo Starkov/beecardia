@@ -43,12 +43,12 @@ public class BeePatientDAOImpl implements org.openmrs.module.beecardia.api.db.Be
     public BeePatient getByHashId(String hashId) {
         Session session = sessionFactory.getCurrentSession();
         BeePatient result = (BeePatient) session.createCriteria(BeePatient.class)
-                .add(Restrictions.eq("hashId", hashId)).uniqueResult();
+                .add(Restrictions.eq("patientHashId", hashId)).uniqueResult();
         return result;
     }
 
     @Override
-    public void set(BeePatient beePatient) {
+    public void save(BeePatient beePatient) {
         Session session = sessionFactory.getCurrentSession();
         session.save(beePatient);
     }

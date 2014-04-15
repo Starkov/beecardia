@@ -15,6 +15,7 @@ package org.openmrs.module.beecardia.api;
 
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.beecardia.BeeDoctor;
+import org.openmrs.module.beecardia.BeePatient;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -22,13 +23,17 @@ import java.util.List;
 @Transactional
 public interface BeeDoctorService extends OpenmrsService {
 
-    void set(BeeDoctor beeDoctor);
+    void save(BeeDoctor beeDoctor);
 
     void update(BeeDoctor beeDoctor);
 
     void delete(BeeDoctor beeDoctor);
 
+    void addPatient(int doctorId, BeePatient patient);
+
     BeeDoctor get(int id);
+
+    BeeDoctor getByLogin(String login);
 
     List<BeeDoctor> getAll();
 }

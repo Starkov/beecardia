@@ -10,7 +10,7 @@
             <column name="id_patient" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="hash_id" type="varchar(255)">
+            <column name="patient_hash_id" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="patient_name" type="varchar(255)">
@@ -56,13 +56,17 @@
 
     <changeSet id="04042014-3" author="starkov">
         <createTable tableName="bc_studies">
-            <column name="id_study" type="int)">
+            <column name="id_study" type="int">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="study_hash_id" type="varchar(255)">
+                <constraints nullable="false"/>
             </column>
             <column name="patient_hash_id" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="external_storage" type="varchar(45)">
+
+            <column name="external_storage" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

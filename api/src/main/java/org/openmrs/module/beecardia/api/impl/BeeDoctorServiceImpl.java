@@ -17,9 +17,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.beecardia.BeeDoctor;
+import org.openmrs.module.beecardia.BeePatient;
 import org.openmrs.module.beecardia.api.BeeDoctorService;
 import org.openmrs.module.beecardia.api.db.BeeDoctorDAO;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -38,8 +40,13 @@ public class BeeDoctorServiceImpl extends BaseOpenmrsService implements BeeDocto
     }
 
     @Override
-    public void set(BeeDoctor beeDoctor) {
-        dao.set(beeDoctor);
+    public BeeDoctor getByLogin(String login) {
+        return dao.getByLogin(login);
+    }
+
+    @Override
+    public void save(BeeDoctor beeDoctor) {
+        dao.save(beeDoctor);
     }
 
     @Override
@@ -50,6 +57,23 @@ public class BeeDoctorServiceImpl extends BaseOpenmrsService implements BeeDocto
     @Override
     public void delete(BeeDoctor beeDoctor) {
         dao.delete(beeDoctor);
+    }
+
+    @Override
+    public void addPatient(int doctorId, BeePatient patient) {
+
+        BeeDoctor doctor = dao.get(doctorId);
+        List<BeePatient> patients = doctor.getBeePatientList();
+
+        if (patients == null) {
+            List<BeePatient> newPatients = new LinkedList<BeePatient>();
+            newPatients.add(patient);
+            doctor.setBeePatientList(newPatients);
+        } else {
+            patients.add(patient);
+            doctor.setBeePatientList(patients);
+        }
+        dao.update(doctor);
     }
 
     @Override

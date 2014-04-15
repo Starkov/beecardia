@@ -32,8 +32,8 @@ public class BeeStudyServiceImpl extends BaseOpenmrsService implements BeeStudyS
     }
 
     @Override
-    public void set(BeeStudy beeStudy) {
-        dao.set(beeStudy);
+    public void save(BeeStudy beeStudy) {
+        dao.save(beeStudy);
     }
 
     @Override
