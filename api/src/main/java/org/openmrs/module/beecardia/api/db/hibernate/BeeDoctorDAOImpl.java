@@ -19,6 +19,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.module.beecardia.BeeDoctor;
+import org.openmrs.module.beecardia.BeePatient;
 import org.openmrs.module.beecardia.api.db.BeeDoctorDAO;
 import org.springframework.stereotype.Repository;
 
@@ -51,6 +52,10 @@ public class BeeDoctorDAOImpl implements BeeDoctorDAO {
     public void save(BeeDoctor beeDoctor) {
         Session session = sessionFactory.getCurrentSession();
         session.save(beeDoctor);
+        for (BeePatient patient : beeDoctor.getBeePatientList()) {
+            patient.getBeeDoctorList().add(beeDoctor);
+            session.update(patient);
+        }
     }
 
     public void update(BeeDoctor beeDoctor) {

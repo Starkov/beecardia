@@ -1,6 +1,7 @@
 CREATE TABLE `bc_doctors` (
-  `id_doctor` INT(11)     NOT NULL AUTO_INCREMENT,
-  `login`     VARCHAR(45) NOT NULL,
+  `id_doctor` INT(11)      NOT NULL AUTO_INCREMENT,
+  `login`     VARCHAR(45)  NOT NULL,
+  `password`  VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id_doctor`),
   UNIQUE KEY `id_doctor` (`id_doctor`)
 )

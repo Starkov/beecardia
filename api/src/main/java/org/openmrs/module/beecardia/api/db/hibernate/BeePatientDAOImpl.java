@@ -18,6 +18,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.openmrs.module.beecardia.BeeDoctor;
 import org.openmrs.module.beecardia.BeePatient;
 import org.springframework.stereotype.Repository;
 
@@ -51,6 +52,11 @@ public class BeePatientDAOImpl implements org.openmrs.module.beecardia.api.db.Be
     public void save(BeePatient beePatient) {
         Session session = sessionFactory.getCurrentSession();
         session.save(beePatient);
+        for (BeeDoctor doctor : beePatient.getBeeDoctorList()) {
+            doctor.getBeePatientList().add(beePatient);
+            session.update(doctor);
+        }
+
     }
 
     @Override

@@ -84,7 +84,8 @@ public class BeeDoctorDAOTest extends BaseModuleContextSensitiveTest {
     }
 
     @Test
-    public void addPatientsToDoctor() {
+    public void add_PatientsToDoctor() {
+
         BeePatient patient1 = new BeePatient();
         BeePatient patient2 = new BeePatient();
 
@@ -94,21 +95,17 @@ public class BeeDoctorDAOTest extends BaseModuleContextSensitiveTest {
         patient2.setPatientHashId("2");
 
         BeeDoctor doctor = new BeeDoctor();
-        doctor.setId(777);
         doctor.setLogin("777");
+        doctor.setPassword("pas999");
         doctor.getBeePatientList().add(patient1);
         doctor.getBeePatientList().add(patient2);
         doctorService.save(doctor);
 
-        BeeDoctor d = doctorService.getByLogin("777");
-        System.out.println(d.getId() + " " + d.getLogin());
         List<BeePatient> patients = doctorService.getByLogin("777").getBeePatientList();
-        for (BeePatient p : patients) {
-            System.out.println(p.getId() + " " + p.getPatientHashId());
-        }
-        assertNotNull(patients);
-        assertNotNull(Context.getService(BeePatientService.class).getById(111).getBeeDoctorList());
+        List<BeeDoctor> doctors = Context.getService(BeePatientService.class).getById(111).getBeeDoctorList();
 
+        assertNotSame(0, patients.size());
+        assertNotSame(0, doctors.size());
     }
 
 }

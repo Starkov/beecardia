@@ -13,7 +13,6 @@
  */
 package org.openmrs.module.beecardia;
 
-import org.hibernate.annotations.Cascade;
 import org.openmrs.BaseOpenmrsObject;
 
 import javax.persistence.*;
@@ -52,8 +51,8 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
     private List<BeeDoctor> beeDoctorList = new LinkedList<BeeDoctor>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "beePatient")
-    @Cascade(value = org.hibernate.annotations.CascadeType.REPLICATE)
-    private List<BeeStudy> beeStudyList;
+//    @Cascade(value = org.hibernate.annotations.CascadeType.REPLICATE)
+    private List<BeeStudy> beeStudyList = new LinkedList<BeeStudy>();
 
     @Override
     public Integer getId() {

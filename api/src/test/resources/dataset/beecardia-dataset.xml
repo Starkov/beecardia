@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-    <bc_doctors id_doctor="1" login="Doc first"/>
-    <bc_doctors id_doctor="2" login="Doc second"/>
+    <bc_doctors id_doctor="1" login="Doc first" password="pass1"/>
+    <bc_doctors id_doctor="2" login="Doc second" password="pass2"/>
     <bc_patients id_patient="1" patient_hash_id="1patientHash" patient_name="woo" patient_first_name="John"
                  patient_middle_name="Amish" patient_last_name="Watson" patient_birth_year="1788"/>
     <bc_patients id_patient="2" patient_hash_id="2patientHash" patient_name="boo" patient_first_name="Vulfrick"

@@ -67,16 +67,18 @@ public class BeecardiaAPITest extends BaseModuleContextSensitiveTest {
 
     @Test
     public void syncService() throws BeeServiceException {
+        BeeDoctorService doctorService = Context.getService(BeeDoctorService.class);
+        BeePatientService patientService = Context.getService(BeePatientService.class);
+        BeeStudyService studyService = Context.getService(BeeStudyService.class);
         BeecardiaSyncService syncService = Context.getService(BeecardiaSyncService.class);
 
         BeeDoctor doctor = new BeeDoctor();
-        doctor.setLogin("test");
+        doctor.setLogin("testapi3@beecardia.com");
+        doctor.setPassword("11111");
+        doctorService.save(doctor);
 
-        Context.getService(BeeDoctorService.class).save(doctor);
-        syncService.sync("testapi3@beecardia.com", "11111", doctor);
+        syncService.sync(doctor);
 
-        BeePatientService patientService = Context.getService(BeePatientService.class);
-        BeeStudyService studyService = Context.getService(BeeStudyService.class);
 
 //        List<BeePatient> patientList = Context.getService(BeePatientService.class).getAll();
 //        for (BeePatient patient : patientList){
@@ -94,13 +96,22 @@ public class BeecardiaAPITest extends BaseModuleContextSensitiveTest {
 //            System.out.println(study.getStudyHashId()+" - "+study.getExternalStorage());
 //        }
 
-        BeeDoctor beeDoctor = Context.getService(BeeDoctorService.class).getByLogin("test");
+        BeeDoctor beeDoctor = doctorService.getByLogin("testapi3@beecardia.com");
         for (BeePatient p : beeDoctor.getBeePatientList()) {
             System.out.println(p.getId() + " " + p.getName());
-            for (BeeStudy s : p.getBeeStudyList()) {
+
+        }
+        List<BeePatient> patientList = patientService.getAll();
+        for (BeePatient patient : patientList) {
+            for (BeeStudy s : patient.getBeeStudyList()) {
                 System.out.println(s.getStudyHashId() + " - " + s.getExternalStorage());
             }
         }
+
+//        List<BeeStudy> studies = studyService.getAll();
+//        for (BeeStudy s : studies){
+//            System.out.println(s.getStudyHashId() + " - " + s.getExternalStorage());
+//        }
 
 //        assertNotNull(studyList);
     }

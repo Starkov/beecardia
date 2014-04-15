@@ -29,8 +29,11 @@ public class BeeDoctor extends BaseOpenmrsObject implements Serializable {
     @Column(name = "id_doctor", unique = true, nullable = false)
     private int id;
 
-    @Column(name = "login")
+    @Column(name = "login", nullable = false)
     private String login;
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "bc_doctor_patient",
@@ -53,8 +56,16 @@ public class BeeDoctor extends BaseOpenmrsObject implements Serializable {
         this.login = login;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getLogin() {
         return login;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void setBeePatientList(List<BeePatient> beePatientList) {

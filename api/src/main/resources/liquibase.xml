@@ -39,6 +39,9 @@
             <column name="login" type="varchar(45)">
                 <constraints nullable="false"/>
             </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
     </changeSet>
@@ -70,6 +73,11 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+    <changeSet id="15042014-1" author="starkov">
+        <createIndex tableName="bc_doctors" indexName="bc_loigin_inx">
+            <column name="login"></column>
+        </createIndex>
     </changeSet>
 
     <changeSet id="04042014-4" author="starkov">

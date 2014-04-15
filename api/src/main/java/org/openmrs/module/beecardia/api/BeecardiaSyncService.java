@@ -7,5 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public interface BeecardiaSyncService extends OpenmrsService {
-    void sync(String login, String pass, BeeDoctor doctor) throws BeeServiceException;
+    void sync(BeeDoctor doctor) throws BeeServiceException;
 }
