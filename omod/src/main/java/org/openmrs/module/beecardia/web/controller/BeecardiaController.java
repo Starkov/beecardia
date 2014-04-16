@@ -49,6 +49,6 @@ public class BeecardiaController {
                 return "redirect:index.form";
             }
         }
-        return "show";
+        return "module/beecardia/show";
     }
 }
