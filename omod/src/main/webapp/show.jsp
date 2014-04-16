@@ -13,8 +13,7 @@ Patients:
         </tr>
         <c:forEach items="${patient.beeStudyList}" var="study">
             <tr>
-                <td>${study.id}</td>
-                <td>${study.externalStorage}</td>
+                <td><a href="study/${study.id}.form">Study №${study.id} </a></td>
             </tr>
         </c:forEach>
     </c:forEach>

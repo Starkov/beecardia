@@ -47,6 +47,7 @@
         <script type="text/javascript">
             var config = new bcViewer.Config();
             var url =
+            ${study.externalStorage}
             var recordType = 2;
 
             if ((recordType === 1) ||
@@ -57,7 +58,7 @@
 
             var viewer = new bcViewer({
                 recordHash: '',
-                recordURL: '',
+                recordURL: url,
                 recordType: recordType
             }, config);
         </script>
