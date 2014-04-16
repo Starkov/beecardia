@@ -38,9 +38,33 @@ public class BeeStudy extends BaseOpenmrsObject implements Serializable {
     private BeePatient beePatient;
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+
+     /* obj ссылается на null */
+
+        if (obj == null)
+            return false;
+
+     /* Удостоверимся, что ссылки имеют тот же самый тип */
+
+        if (!(getClass() == obj.getClass()))
+            return false;
+        else {
+            BeeStudy tmp = (BeeStudy) obj;
+            if (tmp.studyHashId.equals(this.studyHashId))
+                return true;
+            else
+                return false;
+        }
+    }
+
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }
+
 
     public void setStudyHashId(String studyHashId) {
         this.studyHashId = studyHashId;
@@ -58,6 +82,7 @@ public class BeeStudy extends BaseOpenmrsObject implements Serializable {
     public Integer getId() {
         return id;
     }
+
 
     public String getStudyHashId() {
         return studyHashId;

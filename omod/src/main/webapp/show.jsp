@@ -3,15 +3,6 @@
 
 <%@ include file="template/localHeader.jsp" %>
 
-<p>Hello ${user.systemId}!</p></br>
-<form action="/module/beecardia/sync" method="GET">
-    Login: <input type="text" name="login">
-    <br/>
-    Password: <input type="password" name="password"/>
-    <input type="submit" value="Submit"/>
-</form>
-</br>
-
 Patients:
 <table>
 
@@ -28,4 +19,5 @@ Patients:
         </c:forEach>
     </c:forEach>
 </table>
+
 <%@ include file="/WEB-INF/template/footer.jsp" %>

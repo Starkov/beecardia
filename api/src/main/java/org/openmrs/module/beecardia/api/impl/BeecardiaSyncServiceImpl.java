@@ -51,22 +51,39 @@ public class BeecardiaSyncServiceImpl extends BaseOpenmrsService implements Beec
             }
             doctorService.update(doctor);
         } else {
+            List<BeePatient> beePatients = doctor.getBeePatientList();
+
             for (UserPojo user : userPojoList) {
-                for (BeePatient patient : doctor.getBeePatientList()) {
-                    if (!user.getHashId().equals(patient.getPatientHashId())) {
-                        doctor.getBeePatientList().add(PatientExtractor.extract(user));
-                    }
+                BeePatient patient = PatientExtractor.extract(user);
+                if (!beePatients.contains(patient)) {
+                    beePatients.add(patient);
+                    doctor.setBeePatientList(beePatients);
+                    doctorService.update(doctor);
                 }
             }
-            doctorService.update(doctor);
+
         }
+
+
         for (StudyPojo studyPojo : studyPojoList) {
-            for (BeePatient patient : patientService.getAll()) {
-                if (patient.getPatientHashId().equals(studyPojo.getPatientHashId())) {
-                    BeeStudy study = StudyExtractor.extract(studyPojo, patient);
+            BeePatient patient = patientService.getByHashId(studyPojo.getPatientHashId());
+            if (patient != null) {
+                BeeStudy study = StudyExtractor.extract(studyPojo, patient);
+                if (!patient.getBeeStudyList().contains(study)) {
                     studyService.save(study);
                 }
             }
+
         }
+//        List<BeeStudy> beeStudies = studyService.getAll();
+//        for (StudyPojo studyPojo : studyPojoList) {
+//            BeeStudy study = StudyExtractor.extract();
+//            for (BeePatient patient :) {
+//                if (patient.getPatientHashId().equals(studyPojo.getPatientHashId())) {
+//                    BeeStudy study = StudyExtractor.extract(studyPojo, patient);
+//                    studyService.save(study);
+//                }
+//            }
+//        }
     }
 }

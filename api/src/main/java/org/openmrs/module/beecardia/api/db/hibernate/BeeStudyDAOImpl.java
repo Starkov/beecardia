@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.openmrs.module.beecardia.BeePatient;
 import org.openmrs.module.beecardia.BeeStudy;
 import org.openmrs.module.beecardia.api.db.BeeStudyDAO;
 import org.springframework.stereotype.Repository;
@@ -41,6 +42,9 @@ public class BeeStudyDAOImpl implements BeeStudyDAO {
     public void save(BeeStudy beeStudy) {
         Session session = sessionFactory.getCurrentSession();
         session.save(beeStudy);
+        BeePatient patient = beeStudy.getBeePatient();
+        patient.getBeeStudyList().add(beeStudy);
+        session.update(patient);
     }
 
     @Override

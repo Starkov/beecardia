@@ -16,8 +16,6 @@ package org.openmrs.module.beecardia.web.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.beecardia.BeeDoctor;
-import org.openmrs.module.beecardia.api.BeeDoctorService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +30,8 @@ public class BecardiaECGManageController {
 
     @RequestMapping(value = "/module/beecardia/manage")
     public void manage(ModelMap model) {
-        BeeDoctor doctor = Context.getService(BeeDoctorService.class).get(1);
+        //BeeDoctor doctor = Context.getService(BeeDoctorService.class).get(1);
         model.addAttribute("user", Context.getAuthenticatedUser());
-        model.addAttribute("doctor", doctor);
+        // model.addAttribute("doctor", doctor);
     }
 }

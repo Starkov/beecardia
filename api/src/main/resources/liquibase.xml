@@ -7,8 +7,8 @@
 
     <changeSet id="04042014" author="starkov">
         <createTable tableName="bc_patients">
-            <column name="id_patient" type="int">
-                <constraints nullable="false" primaryKey="true"/>
+            <column name="id_patient" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="patient_hash_id" type="varchar(255)">
                 <constraints nullable="false"/>
@@ -59,7 +59,7 @@
 
     <changeSet id="04042014-3" author="starkov">
         <createTable tableName="bc_studies">
-            <column name="id_study" type="int">
+            <column name="id_study" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="study_hash_id" type="varchar(255)">

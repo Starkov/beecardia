@@ -55,6 +55,29 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
     private List<BeeStudy> beeStudyList = new LinkedList<BeeStudy>();
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+
+     /* obj ссылается на null */
+
+        if (obj == null)
+            return false;
+
+     /* Удостоверимся, что ссылки имеют тот же самый тип */
+
+        if (!(getClass() == obj.getClass()))
+            return false;
+        else {
+            BeePatient tmp = (BeePatient) obj;
+            if (tmp.patientHashId.equals(this.getPatientHashId()))
+                return true;
+            else
+                return false;
+        }
+    }
+
+    @Override
     public Integer getId() {
         return id;
     }

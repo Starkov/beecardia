@@ -1033,7 +1033,7 @@ public class BeeServiceAPI {
     }
 
     private String getStringValue(final JsonNode tree, String key) {
-        final JsonNode node = tree.findValue(key);
+        final JsonNode node = tree.get(key);//TODO change tree.findKey(key)(v 1.9.13) on tree.get(key)(v 1.5.0)
         String value = null;
         if (node != null) {
             value = node.getTextValue();

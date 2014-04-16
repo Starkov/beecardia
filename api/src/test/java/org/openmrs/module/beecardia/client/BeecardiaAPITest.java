@@ -79,22 +79,11 @@ public class BeecardiaAPITest extends BaseModuleContextSensitiveTest {
 
         syncService.sync(doctor);
 
-
-//        List<BeePatient> patientList = Context.getService(BeePatientService.class).getAll();
-//        for (BeePatient patient : patientList){
-//            System.out.println(patient.getId()+" "+patient.getName());
-//        }
-
         int sizePatients = patientService.getAll().size();
         assertNotSame(0, sizePatients);
 
         int sizeStudies = studyService.getAll().size();
         assertNotSame(0, sizeStudies);
-
-//        List<BeeStudy> studyList = studyService.getAll();
-//        for(BeeStudy study : studyList){
-//            System.out.println(study.getStudyHashId()+" - "+study.getExternalStorage());
-//        }
 
         BeeDoctor beeDoctor = doctorService.getByLogin("testapi3@beecardia.com");
         for (BeePatient p : beeDoctor.getBeePatientList()) {
@@ -107,12 +96,43 @@ public class BeecardiaAPITest extends BaseModuleContextSensitiveTest {
                 System.out.println(s.getStudyHashId() + " - " + s.getExternalStorage());
             }
         }
+//        BeePatient beePatient = patientService.getById(1);
+//        System.out.println(beePatient.getBeeStudyList().get(0).getExternalStorage() );
+    }
 
-//        List<BeeStudy> studies = studyService.getAll();
-//        for (BeeStudy s : studies){
-//            System.out.println(s.getStudyHashId() + " - " + s.getExternalStorage());
-//        }
+    @Test
+    public void syncAgain() throws BeeServiceException {
+        BeeDoctorService doctorService = Context.getService(BeeDoctorService.class);
+        BeePatientService patientService = Context.getService(BeePatientService.class);
+        BeeStudyService studyService = Context.getService(BeeStudyService.class);
+        BeecardiaSyncService syncService = Context.getService(BeecardiaSyncService.class);
 
-//        assertNotNull(studyList);
+        BeeDoctor doctor = new BeeDoctor();
+        doctor.setLogin("testapi3@beecardia.com");
+        doctor.setPassword("11111");
+        doctorService.save(doctor);
+
+        syncService.sync(doctor);
+
+        syncService.sync(doctor);
+
+
+        BeeDoctor beeDoctor = doctorService.getByLogin("testapi3@beecardia.com");
+        for (BeePatient p : beeDoctor.getBeePatientList()) {
+            System.out.println(p.getId() + " " + p.getName());
+
+        }
+        List<BeePatient> patientList = patientService.getAll();
+        for (BeePatient patient : patientList) {
+            for (BeeStudy s : patient.getBeeStudyList()) {
+                System.out.println(patient.getName() + " " + s.getStudyHashId() + " - " + s.getExternalStorage());
+            }
+        }
+
+        int sizePatients = patientService.getAll().size();
+        assertNotSame(0, sizePatients);
+
+        int sizeStudies = studyService.getAll().size();
+        assertNotSame(0, sizeStudies);
     }
 }

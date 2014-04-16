@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class BeecardiaController {
 
-    @RequestMapping(value = "/module/beecardia/sunc")
-    public void sync(ModelMap map) {
-
+    @RequestMapping(value = "/module/beecardia/index.form", method = RequestMethod.GET)
+    public void index(ModelMap map) {
+        map.addAttribute("doctor", new BeeDoctor());
     }
 
-    @RequestMapping(value = "/module/beecardia/sync", method = RequestMethod.GET)
-    public String sync(ModelMap model,
+    @RequestMapping(value = "/module/beecardia/show.form", method = RequestMethod.GET)
+    public String show(ModelMap model,
                        @RequestParam("login") String login,
                        @RequestParam("password") String password) {
         BeecardiaSyncService syncService = Context.getService(BeecardiaSyncService.class);
@@ -29,7 +29,7 @@ public class BeecardiaController {
 
         if (doctor != null) {
             try {
-                syncService.sync(login, password, doctor);
+                syncService.sync(doctor);
             } catch (BeeServiceException e) {
                 model.addAttribute("error", "No server connection!");
             }
@@ -37,14 +37,18 @@ public class BeecardiaController {
         } else {
             BeeDoctor newDoctor = new BeeDoctor();
             newDoctor.setLogin(login);
+            newDoctor.setPassword(password);
             doctorService.save(newDoctor);
             try {
-                syncService.sync(login, password, newDoctor);
+                syncService.sync(newDoctor);
+                model.addAttribute("patients", doctorService.getByLogin(login).getBeePatientList());
             } catch (BeeServiceException e) {
                 model.addAttribute("error", "No server connection!");
+            } finally {
+                doctorService.delete(newDoctor);
+                return "redirect:index.form";
             }
-            model.addAttribute("patients", doctorService.getByLogin(login).getBeePatientList());
         }
-        return "beecardia";
+        return "show";
     }
 }
