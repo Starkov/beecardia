@@ -11,23 +11,22 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.beecardia.api.db;
+package org.openmrs.module.beecardia.api.dao;
 
-import org.openmrs.module.beecardia.BeePatient;
+import org.openmrs.module.beecardia.api.enity.BeeStudy;
 
 import java.util.List;
 
-public interface BeePatientDAO {
+public interface BeeStudyDAO {
 
-    void save(BeePatient beePatient);
+    void save(BeeStudy beeStudy);
 
-    void update(BeePatient beePatient);
+    void update(BeeStudy beeStudy);
 
-    void delete(BeePatient beePatient);
+    void delete(BeeStudy beeStudy);
 
-    BeePatient getById(int id);
+    BeeStudy getById(Integer id);
 
-    BeePatient getByHashId(String hashId);
+    List<BeeStudy> getAll();
 
-    List<BeePatient> getAll();
 }

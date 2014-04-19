@@ -11,15 +11,15 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.beecardia.api.impl;
+package org.openmrs.module.beecardia.api.service.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.impl.BaseOpenmrsService;
-import org.openmrs.module.beecardia.BeeDoctor;
-import org.openmrs.module.beecardia.BeePatient;
-import org.openmrs.module.beecardia.api.BeeDoctorService;
-import org.openmrs.module.beecardia.api.db.BeeDoctorDAO;
+import org.openmrs.module.beecardia.api.dao.BeeDoctorDAO;
+import org.openmrs.module.beecardia.api.enity.BeeDoctor;
+import org.openmrs.module.beecardia.api.enity.BeePatient;
+import org.openmrs.module.beecardia.api.service.BeeDoctorService;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -36,7 +36,7 @@
     <!--</mappingFiles>-->
 
     <packagesWithMappedClasses>
-        org.openmrs.module.beecardia
+        org.openmrs.module.beecardia.api.enity
     </packagesWithMappedClasses>
 
     <!-- Internationalization -->

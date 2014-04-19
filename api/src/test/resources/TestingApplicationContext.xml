@@ -15,7 +15,7 @@
         <property name="mappingJarLocations" ref="mappingJarResources"/>
         <property name="packagesToScan">
             <list>
-                <value>org.openmrs.module.beecardia</value>
+                <value>org.openmrs.module.beecardia.api.enity</value>
             </list>
         </property>
 

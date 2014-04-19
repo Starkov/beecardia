@@ -7,16 +7,16 @@
     <bean parent="serviceContext">
         <property name="moduleService">
             <list>
-                <value>${project.parent.groupId}.${project.parent.artifactId}.api.BeeDoctorService</value>
+                <value>${project.parent.groupId}.${project.parent.artifactId}.api.service.BeeDoctorService</value>
                 <bean
                         class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
                     <property name="transactionManager">
                         <ref bean="transactionManager"/>
                     </property>
                     <property name="target">
-                        <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.BeeDoctorServiceImpl">
+                        <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.service.impl.BeeDoctorServiceImpl">
                             <property name="dao">
-                                <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.db.hibernate.BeeDoctorDAOImpl">
+                                <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.dao.impl.BeeDoctorDAOImpl">
                                     <property name="sessionFactory">
                                         <ref bean="sessionFactory"/>
                                     </property>
@@ -37,16 +37,16 @@
     <bean parent="serviceContext">
         <property name="moduleService">
             <list>
-                <value>${project.parent.groupId}.${project.parent.artifactId}.api.BeePatientService</value>
+                <value>${project.parent.groupId}.${project.parent.artifactId}.api.service.BeePatientService</value>
                 <bean
                         class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
                     <property name="transactionManager">
                         <ref bean="transactionManager"/>
                     </property>
                     <property name="target">
-                        <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.BeePatientServiceImpl">
+                        <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.service.impl.BeePatientServiceImpl">
                             <property name="dao">
-                                <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.db.hibernate.BeePatientDAOImpl">
+                                <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.dao.impl.BeePatientDAOImpl">
                                     <property name="sessionFactory">
                                         <ref bean="sessionFactory"/>
                                     </property>
@@ -67,16 +67,16 @@
     <bean parent="serviceContext">
         <property name="moduleService">
             <list>
-                <value>${project.parent.groupId}.${project.parent.artifactId}.api.BeeStudyService</value>
+                <value>${project.parent.groupId}.${project.parent.artifactId}.api.service.BeeStudyService</value>
                 <bean
                         class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
                     <property name="transactionManager">
                         <ref bean="transactionManager"/>
                     </property>
                     <property name="target">
-                        <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.BeeStudyServiceImpl">
+                        <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.service.impl.BeeStudyServiceImpl">
                             <property name="dao">
-                                <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.db.hibernate.BeeStudyDAOImpl">
+                                <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.dao.impl.BeeStudyDAOImpl">
                                     <property name="sessionFactory">
                                         <ref bean="sessionFactory"/>
                                     </property>
@@ -97,14 +97,14 @@
     <bean parent="serviceContext">
         <property name="moduleService">
             <list>
-                <value>${project.parent.groupId}.${project.parent.artifactId}.api.BeecardiaSyncService</value>
+                <value>${project.parent.groupId}.${project.parent.artifactId}.api.service.BeecardiaSyncService</value>
                 <bean
                         class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
                     <property name="transactionManager">
                         <ref bean="transactionManager"/>
                     </property>
                     <property name="target">
-                        <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.impl.BeecardiaSyncServiceImpl">
+                        <bean class="${project.parent.groupId}.${project.parent.artifactId}.api.service.impl.BeecardiaSyncServiceImpl">
 
                         </bean>
                     </property>

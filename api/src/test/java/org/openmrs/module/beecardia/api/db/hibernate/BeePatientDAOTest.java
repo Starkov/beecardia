@@ -4,11 +4,13 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.beecardia.BeeDoctor;
-import org.openmrs.module.beecardia.BeePatient;
-import org.openmrs.module.beecardia.api.BeePatientService;
+import org.openmrs.module.beecardia.api.enity.BeeDoctor;
+import org.openmrs.module.beecardia.api.enity.BeePatient;
+import org.openmrs.module.beecardia.api.service.BeeDoctorService;
+import org.openmrs.module.beecardia.api.service.BeePatientService;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
 
+import static junit.framework.Assert.assertNotSame;
 import static junit.framework.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -16,11 +18,13 @@ import static org.junit.Assert.assertNotNull;
 public class BeePatientDAOTest extends BaseModuleContextSensitiveTest {
 
     private BeePatientService patientService;
+    private BeeDoctorService doctorService;
 
     @Before
     public void setupDB() throws Exception {
         executeDataSet("dataset/beecardia-dataset.xml");
         patientService = Context.getService(BeePatientService.class);
+        doctorService = Context.getService(BeeDoctorService.class);
     }
 
     @Test
@@ -35,25 +39,7 @@ public class BeePatientDAOTest extends BaseModuleContextSensitiveTest {
 
     @Test
     public void getAllPatient() {
-        for (BeePatient patient : patientService.getAll()) {
-            System.out.println(patient.getName());
-        }
-        assertNotNull(patientService.getAll().get(0));
-    }
-
-    @Test
-    public void setPatient() {
-        BeePatient patient = new BeePatient();
-        patient.setId(4);
-        patient.setPatientHashId("4patientHash");
-        patient.setName("Pasichnik Sergey");
-        patient.setFirstName("Sergey");
-        patient.setLastName("Pasichnik");
-        BeeDoctor doctor = new BeeDoctor();
-        doctor.setLogin("test");
-        patient.getBeeDoctorList().add(doctor);
-        patientService.save(patient);
-        assertNotNull(patientService.getById(4));
+        assertNotSame(0, patientService.getAll().size());
     }
 
     @Test
@@ -67,14 +53,33 @@ public class BeePatientDAOTest extends BaseModuleContextSensitiveTest {
     @Test
     public void deletePatient() {
         BeePatient patient = patientService.getById(2);
+        BeeDoctor doctor = patient.getBeeDoctorList().get(0);
+
         patientService.delete(patient);
+
         assertNull(patientService.getById(2));
+        Assert.assertNotNull(doctorService.getByLogin(doctor.getLogin()));
     }
 
     @Test
     public void getDoctorList() {
         BeePatient patient = patientService.getById(1);
-        Assert.assertNotNull(patient.getBeeDoctorList());
+        assertNotSame(0, patient.getBeeDoctorList().size());
+    }
+
+    @Test
+    public void setPatient() {
+        BeePatient patient = new BeePatient("4patientHash", "Pasichnik Sergey");
+        BeeDoctor doctor = new BeeDoctor("test", "123asd");
+
+        patient.setId(4);
+        patient.getBeeDoctorList().add(doctor);
+        doctor.getBeePatientList().add(patient);
+
+        patientService.save(patient);
+
+        assertNotNull(patientService.getById(4));
+        Assert.assertTrue(doctorService.getByLogin("test").getBeePatientList().contains(patient));
     }
 
 

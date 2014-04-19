@@ -11,13 +11,16 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.beecardia.api.db;
+package org.openmrs.module.beecardia.api.service;
 
-import org.openmrs.module.beecardia.BeeStudy;
+import org.openmrs.api.OpenmrsService;
+import org.openmrs.module.beecardia.api.enity.BeeStudy;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface BeeStudyDAO {
+@Transactional
+public interface BeeStudyService extends OpenmrsService {
 
     void save(BeeStudy beeStudy);
 
@@ -28,5 +31,4 @@ public interface BeeStudyDAO {
     BeeStudy getById(Integer id);
 
     List<BeeStudy> getAll();
-
 }

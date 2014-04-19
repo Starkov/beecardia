@@ -3,20 +3,17 @@
 
 <%@ include file="template/localHeader.jsp" %>
 
-Patients:
 <table>
-
+    <th>Patient Name</th>
+    <th>Study number</th>
     <c:forEach items="${patients}" var="patient">
-        <tr>
-
-        </tr>
         <c:forEach items="${patient.beeStudyList}" var="study">
+
             <tr>
-                <td>${patient.name}</td>
-                <td>${patient.firstName}</td>
-                <td>${patient.lastName}</td>
-                <td><a href="study/${study.id}.form">Study: ${study.id} </a></td>
+                <td><a href="study/${study.id}.form">${patient.name}</a></td>
+                <td>Study: ${study.id} </td>
             </tr>
+
         </c:forEach>
     </c:forEach>
 </table>

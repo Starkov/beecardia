@@ -16,18 +16,10 @@
             <column name="patient_name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="patient_first_name" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="patient_middle_name" type="varchar(255)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="patient_last_name" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="patient_birth_year" type="int">
-                <constraints nullable="true"/>
-            </column>
+            <column name="patient_first_name" type="varchar(255)"/>
+            <column name="patient_middle_name" type="varchar(255)"/>
+            <column name="patient_last_name" type="varchar(255)"/>
+            <column name="patient_birth_year" type="int"/>
         </createTable>
     </changeSet>
 

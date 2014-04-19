@@ -5,27 +5,19 @@
 
 <p>Hello ${user.systemId}!</p></br>
 <form action="show.form" method="GET">
-    Login: <input type="text" name="login">
-    <br/>
-    Password: <input type="password" name="password"/>
-    <input type="submit" value="Submit"/>
-</form>
-</br>
-
-Patients:
-<table>
-
-    <c:forEach items="${patients}" var="patient">
+    <table>
         <tr>
-            <td>${patient.firstName}</td>
-            <td>${patient.lastName}</td>
+            <td>Login:</td>
+            <td><input type="text" name="login"></td>
         </tr>
-        <c:forEach items="${patient.beeStudyList}" var="study">
-            <tr>
-                <td>${study.id}</td>
-                <td>${study.externalStorage}</td>
-            </tr>
-        </c:forEach>
-    </c:forEach>
-</table>
+        <tr>
+            <td>Password:</td>
+            <td><input type="password" name="password"/></td>
+        </tr>
+        <tr>
+            <td colspan="3"><input type="submit" value="Submit"/></td>
+        </tr>
+    </table>
+</form>
+
 <%@ include file="/WEB-INF/template/footer.jsp" %>

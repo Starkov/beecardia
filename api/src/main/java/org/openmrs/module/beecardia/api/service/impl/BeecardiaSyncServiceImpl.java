@@ -1,17 +1,22 @@
-package org.openmrs.module.beecardia.api.impl;
+package org.openmrs.module.beecardia.api.service.impl;
 
 import org.openmrs.api.context.Context;
 import org.openmrs.api.impl.BaseOpenmrsService;
-import org.openmrs.module.beecardia.*;
-import org.openmrs.module.beecardia.api.BeeDoctorService;
-import org.openmrs.module.beecardia.api.BeePatientService;
-import org.openmrs.module.beecardia.api.BeeStudyService;
-import org.openmrs.module.beecardia.api.BeecardiaSyncService;
+import org.openmrs.module.beecardia.api.enity.BeeDoctor;
+import org.openmrs.module.beecardia.api.enity.BeePatient;
+import org.openmrs.module.beecardia.api.enity.BeeStudy;
+import org.openmrs.module.beecardia.api.service.BeeDoctorService;
+import org.openmrs.module.beecardia.api.service.BeePatientService;
+import org.openmrs.module.beecardia.api.service.BeeStudyService;
+import org.openmrs.module.beecardia.api.service.BeecardiaSyncService;
+import org.openmrs.module.beecardia.api.util.PatientExtractor;
+import org.openmrs.module.beecardia.api.util.StudyExtractor;
 import org.openmrs.module.beecardia.client.api.*;
 
 import java.util.List;
 
 public class BeecardiaSyncServiceImpl extends BaseOpenmrsService implements BeecardiaSyncService {
+
 
     @Override
     public void sync(BeeDoctor doctor) throws BeeServiceException {
@@ -75,15 +80,6 @@ public class BeecardiaSyncServiceImpl extends BaseOpenmrsService implements Beec
             }
 
         }
-//        List<BeeStudy> beeStudies = studyService.getAll();
-//        for (StudyPojo studyPojo : studyPojoList) {
-//            BeeStudy study = StudyExtractor.extract();
-//            for (BeePatient patient :) {
-//                if (patient.getPatientHashId().equals(studyPojo.getPatientHashId())) {
-//                    BeeStudy study = StudyExtractor.extract(studyPojo, patient);
-//                    studyService.save(study);
-//                }
-//            }
-//        }
+
     }
 }

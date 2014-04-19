@@ -11,21 +11,21 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.beecardia.api.db.hibernate;
+package org.openmrs.module.beecardia.api.dao.impl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
-import org.openmrs.module.beecardia.BeeDoctor;
-import org.openmrs.module.beecardia.BeePatient;
+import org.openmrs.module.beecardia.api.dao.BeeStudyDAO;
+import org.openmrs.module.beecardia.api.enity.BeePatient;
+import org.openmrs.module.beecardia.api.enity.BeeStudy;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class BeePatientDAOImpl implements org.openmrs.module.beecardia.api.db.BeePatientDAO {
+public class BeeStudyDAOImpl implements BeeStudyDAO {
 
     protected final Log log = LogFactory.getLog(this.getClass());
     private SessionFactory sessionFactory;
@@ -34,46 +34,41 @@ public class BeePatientDAOImpl implements org.openmrs.module.beecardia.api.db.Be
         this.sessionFactory = sessionFactory;
     }
 
-    @Override
-    public BeePatient getById(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        return (BeePatient) session.get(BeePatient.class, id);
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 
     @Override
-    public BeePatient getByHashId(String hashId) {
+    public void save(BeeStudy beeStudy) {
         Session session = sessionFactory.getCurrentSession();
-        BeePatient result = (BeePatient) session.createCriteria(BeePatient.class)
-                .add(Restrictions.eq("patientHashId", hashId)).uniqueResult();
-        return result;
+        session.save(beeStudy);
+        BeePatient patient = beeStudy.getBeePatient();
+        patient.getBeeStudyList().add(beeStudy);
+        session.update(patient);
     }
 
     @Override
-    public void save(BeePatient beePatient) {
+    public void update(BeeStudy beeStudy) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(beePatient);
-        for (BeeDoctor doctor : beePatient.getBeeDoctorList()) {
-            doctor.getBeePatientList().add(beePatient);
-            session.update(doctor);
-        }
-
+        session.update(beeStudy);
     }
 
     @Override
-    public void update(BeePatient beePatient) {
+    public void delete(BeeStudy beeStudy) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(beePatient);
+        session.delete(beeStudy);
     }
 
     @Override
-    public void delete(BeePatient beePatient) {
+    public BeeStudy getById(Integer id) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(beePatient);
+        return (BeeStudy) session.get(BeeStudy.class, id);
     }
 
     @Override
-    public List<BeePatient> getAll() {
+    public List<BeeStudy> getAll() {
         Session session = sessionFactory.getCurrentSession();
-        return (List<BeePatient>) session.createQuery("from BeePatient ").list();
+        return session.createQuery("from BeeStudy").list();
     }
+
 }

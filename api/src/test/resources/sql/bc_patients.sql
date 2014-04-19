@@ -1,3 +1,0 @@
-INSERT INTO openmrs.bc_patients (id_patient, patient_hash_id, patient_name, patient_first_name, patient_middle_name, patient_last_name, patient_birth_year) VALUES (1, '1patientHash', 'woo', 'John', 'Amish', 'Watson', 1788);
-INSERT INTO openmrs.bc_patients (id_patient, patient_hash_id, patient_name, patient_first_name, patient_middle_name, patient_last_name, patient_birth_year) VALUES (2, '2patientHash', 'boo', 'Vulfrick', 'Albus', 'Dombldor', 1478);
-INSERT INTO openmrs.bc_patients (id_patient, patient_hash_id, patient_name, patient_first_name, patient_middle_name, patient_last_name, patient_birth_year) VALUES (3, '3patientHash', 'Pasichnik Sergey', 'Sergey', null, 'Pasichnik', 0);

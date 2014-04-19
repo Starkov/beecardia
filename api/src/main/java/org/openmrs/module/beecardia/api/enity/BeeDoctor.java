@@ -11,8 +11,9 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.beecardia;
+package org.openmrs.module.beecardia.api.enity;
 
+import org.hibernate.annotations.Cascade;
 import org.openmrs.BaseOpenmrsObject;
 
 import javax.persistence.*;
@@ -24,54 +25,60 @@ import java.util.List;
 @Table(name = "bc_doctors")
 public class BeeDoctor extends BaseOpenmrsObject implements Serializable {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id_doctor", unique = true, nullable = false)
     private int id;
-
-    @Column(name = "login", nullable = false)
     private String login;
-
-    @Column(name = "password", nullable = false)
     private String password;
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "bc_doctor_patient",
-            joinColumns = {@JoinColumn(name = "id_doctor", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "id_patient", nullable = false, updatable = false)})
     private List<BeePatient> beePatientList = new LinkedList<BeePatient>();
 
-
-    @Override
-    public Integer getId() {
-        return this.id;  //To change body of implemented methods use File | Settings | File Templates.
+    public BeeDoctor() {
     }
 
-    @Override
+    public BeeDoctor(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
+
 
     public void setLogin(String login) {
         this.login = login;
     }
 
+
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 
     public void setBeePatientList(List<BeePatient> beePatientList) {
         this.beePatientList = beePatientList;
     }
 
+    @Id
+    @GeneratedValue
+    @Column(name = "id_doctor", unique = true, nullable = false)
+    public Integer getId() {
+        return this.id;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Column(name = "login", nullable = false)
+    public String getLogin() {
+        return login;
+    }
+
+    @Column(name = "password", nullable = false)
+    public String getPassword() {
+        return password;
+    }
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    @JoinTable(name = "bc_doctor_patient",
+            joinColumns = {@JoinColumn(name = "id_doctor", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "id_patient", nullable = false)})
     public List<BeePatient> getBeePatientList() {
         return beePatientList;
     }

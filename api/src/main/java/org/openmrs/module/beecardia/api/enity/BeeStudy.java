@@ -11,8 +11,9 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.beecardia;
+package org.openmrs.module.beecardia.api.enity;
 
+import org.hibernate.annotations.Cascade;
 import org.openmrs.BaseOpenmrsObject;
 
 import javax.persistence.*;
@@ -22,33 +23,26 @@ import java.io.Serializable;
 @Table(name = "bc_studies")
 public class BeeStudy extends BaseOpenmrsObject implements Serializable {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "id_study", unique = true, nullable = false)
     private Integer id;
-
-    @Column(name = "study_hash_id", nullable = false)
     private String studyHashId;
-
-    @Column(name = "external_storage", nullable = false)
     private String externalStorage;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = BeePatient.class)
-    @JoinColumn(name = "patient_hash_id", referencedColumnName = "patient_hash_id", nullable = false)
     private BeePatient beePatient;
+
+    public BeeStudy() {
+    }
+
+    public BeeStudy(String studyHashId, String externalStorage, BeePatient beePatient) {
+        this.studyHashId = studyHashId;
+        this.externalStorage = externalStorage;
+        this.beePatient = beePatient;
+    }
 
     @Override
     public boolean equals(Object obj) {
         if (obj == this)
             return true;
-
-     /* obj ссылается на null */
-
         if (obj == null)
             return false;
-
-     /* Удостоверимся, что ссылки имеют тот же самый тип */
-
         if (!(getClass() == obj.getClass()))
             return false;
         else {
@@ -65,7 +59,6 @@ public class BeeStudy extends BaseOpenmrsObject implements Serializable {
         this.id = id;
     }
 
-
     public void setStudyHashId(String studyHashId) {
         this.studyHashId = studyHashId;
     }
@@ -78,20 +71,26 @@ public class BeeStudy extends BaseOpenmrsObject implements Serializable {
         this.externalStorage = externalStorage;
     }
 
-    @Override
+    @Id
+    @GeneratedValue
+    @Column(name = "id_study", unique = true, nullable = false)
     public Integer getId() {
         return id;
     }
 
-
+    @Column(name = "study_hash_id", nullable = false)
     public String getStudyHashId() {
         return studyHashId;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = BeePatient.class)
+    @JoinColumn(name = "patient_hash_id", referencedColumnName = "patient_hash_id", nullable = false)
+    @Cascade(value = org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     public BeePatient getBeePatient() {
         return beePatient;
     }
 
+    @Column(name = "external_storage", nullable = false)
     public String getExternalStorage() {
         return externalStorage;
     }

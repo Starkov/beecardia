@@ -1,10 +1,10 @@
 package org.openmrs.module.beecardia.web.controller;
 
 import org.openmrs.api.context.Context;
-import org.openmrs.module.beecardia.BeeDoctor;
-import org.openmrs.module.beecardia.api.BeeDoctorService;
-import org.openmrs.module.beecardia.api.BeeStudyService;
-import org.openmrs.module.beecardia.api.BeecardiaSyncService;
+import org.openmrs.module.beecardia.api.enity.BeeDoctor;
+import org.openmrs.module.beecardia.api.service.BeeDoctorService;
+import org.openmrs.module.beecardia.api.service.BeeStudyService;
+import org.openmrs.module.beecardia.api.service.BeecardiaSyncService;
 import org.openmrs.module.beecardia.client.api.BeeServiceException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,13 +18,14 @@ public class BeecardiaController {
 
     @RequestMapping(value = "/module/beecardia/index.form", method = RequestMethod.GET)
     public void index(ModelMap map) {
-        map.addAttribute("doctor", new BeeDoctor());
+
     }
 
     @RequestMapping(value = "/module/beecardia/show.form", method = RequestMethod.GET)
     public String show(ModelMap model,
                        @RequestParam("login") String login,
                        @RequestParam("password") String password) {
+
         BeecardiaSyncService syncService = Context.getService(BeecardiaSyncService.class);
         BeeDoctorService doctorService = Context.getService(BeeDoctorService.class);
         BeeDoctor doctor = doctorService.getByLogin(login);

@@ -11,24 +11,29 @@
  *
  * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
  */
-package org.openmrs.module.beecardia.api;
+package org.openmrs.module.beecardia.api.service;
 
 import org.openmrs.api.OpenmrsService;
-import org.openmrs.module.beecardia.BeeStudy;
+import org.openmrs.module.beecardia.api.enity.BeeDoctor;
+import org.openmrs.module.beecardia.api.enity.BeePatient;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Transactional
-public interface BeeStudyService extends OpenmrsService {
+public interface BeePatientService extends OpenmrsService {
 
-    void save(BeeStudy beeStudy);
+    void save(BeePatient beePatient);
 
-    void update(BeeStudy beeStudy);
+    void update(BeePatient beePatient);
 
-    void delete(BeeStudy beeStudy);
+    void delete(BeePatient beePatient);
 
-    BeeStudy getById(Integer id);
+    void addDoctor(int patientId, BeeDoctor docotr);
 
-    List<BeeStudy> getAll();
+    BeePatient getById(int id);
+
+    BeePatient getByHashId(String hashId);
+
+    List<BeePatient> getAll();
 }

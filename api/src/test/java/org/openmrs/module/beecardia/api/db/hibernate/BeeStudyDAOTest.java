@@ -4,10 +4,10 @@ package org.openmrs.module.beecardia.api.db.hibernate;
 import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.beecardia.BeePatient;
-import org.openmrs.module.beecardia.BeeStudy;
-import org.openmrs.module.beecardia.api.BeePatientService;
-import org.openmrs.module.beecardia.api.BeeStudyService;
+import org.openmrs.module.beecardia.api.enity.BeePatient;
+import org.openmrs.module.beecardia.api.enity.BeeStudy;
+import org.openmrs.module.beecardia.api.service.BeePatientService;
+import org.openmrs.module.beecardia.api.service.BeeStudyService;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
 
 import static junit.framework.Assert.*;
@@ -15,11 +15,13 @@ import static junit.framework.Assert.*;
 public class BeeStudyDAOTest extends BaseModuleContextSensitiveTest {
 
     private BeeStudyService studyService;
+    private BeePatientService patientService;
 
     @Before
     public void setupDB() throws Exception {
         executeDataSet("dataset/beecardia-dataset.xml");
         studyService = Context.getService(BeeStudyService.class);
+        patientService = Context.getService(BeePatientService.class);
     }
 
     @Test
@@ -29,16 +31,12 @@ public class BeeStudyDAOTest extends BaseModuleContextSensitiveTest {
 
     @Test
     public void saveStudy() {
-        BeePatientService patientService = Context.getService(BeePatientService.class);
         BeePatient patient = patientService.getById(3);
-
-        BeeStudy study = new BeeStudy();
+        BeeStudy study = new BeeStudy("6studyHash", "link to study 3", patient);
         study.setId(11);
-        study.setStudyHashId("6studyHash");
-        study.setBeePatient(patient);
-        study.setExternalStorage("link to study 3");
 
         studyService.save(study);
+
         assertNotNull(studyService.getById(11));
         assertEquals("link to study 3", patientService.getById(3).getBeeStudyList().get(0).getExternalStorage());
     }
@@ -54,8 +52,10 @@ public class BeeStudyDAOTest extends BaseModuleContextSensitiveTest {
 
     @Test
     public void deleteStudy() {
-        studyService.delete(studyService.getById(10));
+        BeeStudy study = studyService.getById(10);
+        studyService.delete(study);
         assertNull(studyService.getById(10));
+        assertTrue(patientService.getAll().contains(study.getBeePatient()));
     }
 
     @Test
