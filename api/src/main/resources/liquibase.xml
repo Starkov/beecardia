@@ -64,6 +64,9 @@
             <column name="external_storage" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="start_time" type="Date"/>
+            <column name="anamnesis" type="varchar(255)"/>
+            <column name="code_icd" type="varchar(255)"/>
         </createTable>
     </changeSet>
     <changeSet id="15042014-1" author="starkov">
