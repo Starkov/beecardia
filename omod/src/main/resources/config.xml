@@ -29,6 +29,10 @@
         <point>org.openmrs.gutter.tools</point>
         <class>org.openmrs.module.beecardia.extension.html.GutterListExt</class>
     </extension>
+    <extension>
+        <point>org.openmrs.patientDashboardTab</point>
+        <class>org.openmrs.module.beecardia.extension.html.PatientDashboardTab</class>
+    </extension>
 
     <!-- Maps hibernate file's, if present -->
     <!--<mappingFiles>-->
