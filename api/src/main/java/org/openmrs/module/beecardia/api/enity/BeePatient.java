@@ -33,6 +33,7 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
     private String middleName;
     private String lastName;
     private int birthYear;
+    private int openmrsPatientId;
     private List<BeeDoctor> beeDoctorList = new LinkedList<BeeDoctor>();
     private List<BeeStudy> beeStudyList = new LinkedList<BeeStudy>();
 
@@ -99,6 +100,10 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
         this.beeStudyList = beeStudyList;
     }
 
+    public void setOpenmrsPatientId(int openmrsPatientId) {
+        this.openmrsPatientId = openmrsPatientId;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "id_patient", unique = true, nullable = false)
@@ -146,5 +151,11 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
     @Cascade(value = CascadeType.ALL)
     public List<BeeStudy> getBeeStudyList() {
         return beeStudyList;
+
+    }
+
+    @Column(name = "openmrs_patient_id")
+    public int getOpenmrsPatientId() {
+        return openmrsPatientId;
     }
 }
