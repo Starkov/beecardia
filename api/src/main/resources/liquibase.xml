@@ -20,6 +20,7 @@
             <column name="patient_middle_name" type="varchar(255)"/>
             <column name="patient_last_name" type="varchar(255)"/>
             <column name="patient_birth_year" type="int"/>
+            <column name="openmrs_patient_id" type="int"/>
         </createTable>
     </changeSet>
 
@@ -113,6 +114,20 @@
                                  constraintName="fk_bc_patient"
                                  referencedTableName="bc_patients"
                                  referencedColumnNames="patient_hash_id"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"/>
+    </changeSet>
+    <changeSet id="04042014-11" author="starkov">
+        <createIndex tableName="bc_patients" indexName="openmrs_patient_indx">
+            <column name="openmrs_patient_id"></column>
+        </createIndex>
+    </changeSet>
+    <changeSet id="04042014-12" author="starkov">
+        <addForeignKeyConstraint baseTableName="bc_patients"
+                                 baseColumnNames="openmrs_patient_id"
+                                 constraintName="fk_openmrs_patient"
+                                 referencedTableName="patient"
+                                 referencedColumnNames="patient_id"
                                  onDelete="CASCADE"
                                  onUpdate="CASCADE"/>
     </changeSet>
