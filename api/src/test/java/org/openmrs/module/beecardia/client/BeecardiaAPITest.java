@@ -3,6 +3,7 @@ package org.openmrs.module.beecardia.client;
 import org.junit.Test;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.beecardia.api.enity.BeeDoctor;
+import org.openmrs.module.beecardia.api.enity.BeeStudy;
 import org.openmrs.module.beecardia.api.service.BeeDoctorService;
 import org.openmrs.module.beecardia.api.service.BeePatientService;
 import org.openmrs.module.beecardia.api.service.BeeStudyService;
@@ -37,6 +38,10 @@ public class BeecardiaAPITest extends BaseModuleContextSensitiveTest {
         doctorService.save(doctor);
 
         syncService.sync(doctor);
+
+        for (BeeStudy s : studyService.getAll()) {
+            System.out.println(s.getBeePatient().getName() + "-" + s.getExternalStorage());
+        }
 
         assertNotSame(0, patientService.getAll().size());
         assertNotSame(0, studyService.getAll().size());

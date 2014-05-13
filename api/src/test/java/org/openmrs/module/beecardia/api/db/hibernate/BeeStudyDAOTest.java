@@ -10,6 +10,8 @@ import org.openmrs.module.beecardia.api.service.BeePatientService;
 import org.openmrs.module.beecardia.api.service.BeeStudyService;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
 
+import java.util.Date;
+
 import static junit.framework.Assert.*;
 
 public class BeeStudyDAOTest extends BaseModuleContextSensitiveTest {
@@ -32,7 +34,7 @@ public class BeeStudyDAOTest extends BaseModuleContextSensitiveTest {
     @Test
     public void saveStudy() {
         BeePatient patient = patientService.getById(3);
-        BeeStudy study = new BeeStudy("6studyHash", "link to study 3", patient);
+        BeeStudy study = new BeeStudy(new Date(2014, 02, 01, 11, 12), "6studyHash", "link to study 3", patient);
         study.setId(11);
 
         studyService.save(study);

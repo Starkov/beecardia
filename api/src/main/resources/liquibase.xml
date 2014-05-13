@@ -54,6 +54,9 @@
             <column name="id_study" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
+            <column name="study_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
             <column name="study_hash_id" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>

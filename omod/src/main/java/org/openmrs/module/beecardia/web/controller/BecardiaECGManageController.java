@@ -30,8 +30,7 @@ public class BecardiaECGManageController {
 
     @RequestMapping(value = "/module/beecardia/manage")
     public void manage(ModelMap model) {
-        //BeeDoctor doctor = Context.getService(BeeDoctorService.class).get(1);
         model.addAttribute("user", Context.getAuthenticatedUser());
-        // model.addAttribute("doctor", doctor);
     }
+
 }

@@ -9,7 +9,7 @@ public class StudyExtractor {
     public static BeeStudy extract(StudyPojo studyPojo, BeePatient patient) {
 
         BeeStudy study = new BeeStudy();
-
+        study.setStudyDate(studyPojo.getStartTime());
         study.setStudyHashId(studyPojo.getStudyHashId());
         study.setBeePatient(patient);
         study.setExternalStorage(studyPojo.getExternalLink());

@@ -47,7 +47,6 @@ public class BeecardiaController {
                 model.addAttribute("patients", doctorService.getByLogin(login).getBeePatientList());
             } catch (BeeServiceException e) {
                 model.addAttribute("error", "No server connection!");
-            } finally {
                 doctorService.delete(newDoctor);
                 return "redirect:index.form";
             }

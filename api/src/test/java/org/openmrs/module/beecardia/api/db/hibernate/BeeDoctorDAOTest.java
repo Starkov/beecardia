@@ -22,6 +22,7 @@ public class BeeDoctorDAOTest extends BaseModuleContextSensitiveTest {
         executeDataSet("dataset/beecardia-dataset.xml");
         doctorService = Context.getService(BeeDoctorService.class);
         patientService = Context.getService(BeePatientService.class);
+
     }
 
     @Test

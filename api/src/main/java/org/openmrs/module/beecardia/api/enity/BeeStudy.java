@@ -18,12 +18,14 @@ import org.openmrs.BaseOpenmrsObject;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "bc_studies")
 public class BeeStudy extends BaseOpenmrsObject implements Serializable {
 
     private Integer id;
+    private Date studyDate;
     private String studyHashId;
     private String externalStorage;
     private BeePatient beePatient;
@@ -31,7 +33,8 @@ public class BeeStudy extends BaseOpenmrsObject implements Serializable {
     public BeeStudy() {
     }
 
-    public BeeStudy(String studyHashId, String externalStorage, BeePatient beePatient) {
+    public BeeStudy(Date studyDate, String studyHashId, String externalStorage, BeePatient beePatient) {
+        this.studyDate = studyDate;
         this.studyHashId = studyHashId;
         this.externalStorage = externalStorage;
         this.beePatient = beePatient;
@@ -59,6 +62,10 @@ public class BeeStudy extends BaseOpenmrsObject implements Serializable {
         this.id = id;
     }
 
+    public void setStudyDate(Date studyDate) {
+        this.studyDate = studyDate;
+    }
+
     public void setStudyHashId(String studyHashId) {
         this.studyHashId = studyHashId;
     }
@@ -76,6 +83,11 @@ public class BeeStudy extends BaseOpenmrsObject implements Serializable {
     @Column(name = "id_study", unique = true, nullable = false)
     public Integer getId() {
         return id;
+    }
+
+    @Column(name = "study_date", nullable = false)
+    public Date getStudyDate() {
+        return studyDate;
     }
 
     @Column(name = "study_hash_id", nullable = false)
