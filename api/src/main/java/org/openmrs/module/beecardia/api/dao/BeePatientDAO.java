@@ -27,6 +27,8 @@ public interface BeePatientDAO {
 
     BeePatient getById(int id);
 
+    BeePatient getByOpenmrsId(int id);
+
     BeePatient getByHashId(String hashId);
 
     List<BeePatient> getAll();

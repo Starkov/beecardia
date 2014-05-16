@@ -3,12 +3,10 @@ package org.openmrs.module.beecardia.web.controller;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.beecardia.api.enity.BeeDoctor;
 import org.openmrs.module.beecardia.api.service.BeeDoctorService;
-import org.openmrs.module.beecardia.api.service.BeeStudyService;
 import org.openmrs.module.beecardia.api.service.BeecardiaSyncService;
 import org.openmrs.module.beecardia.client.api.BeeServiceException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,9 +52,5 @@ public class BeecardiaController {
         return "module/beecardia/show";
     }
 
-    @RequestMapping(value = "/module/beecardia/study/{studyId}", method = RequestMethod.GET)
-    public String viewer(@PathVariable("studyId") int id, ModelMap model) {
-        model.addAttribute("study", Context.getService(BeeStudyService.class).getById(id));
-        return "module/beecardia/viewer";
-    }
+
 }

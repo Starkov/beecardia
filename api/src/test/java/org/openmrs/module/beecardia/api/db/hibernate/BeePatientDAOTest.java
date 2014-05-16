@@ -82,5 +82,8 @@ public class BeePatientDAOTest extends BaseModuleContextSensitiveTest {
         Assert.assertTrue(doctorService.getByLogin("test").getBeePatientList().contains(patient));
     }
 
-
+    @Test
+    public void getPatientByOpenmrsId() throws Exception {
+        Assert.assertNotNull(patientService.getByOpenmrsId(1));
+    }
 }

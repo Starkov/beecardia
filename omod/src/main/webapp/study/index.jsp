@@ -1,5 +1,6 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 <%@ include file="/WEB-INF/template/header.jsp" %>
+
 <div id="patientHeader" class="boxHeader">
     <div id="patientHeaderPatientName">
         ${patient.givenName} ${patient.middleName} ${patient.familyName} ${patient.gender}
@@ -12,11 +13,17 @@
     </div>
 </div>
 
-<div class="boxHeader">Study ${study.studyDate}</div>
+<div class="boxHeader">Studies</div>
 <div class="box">
-    <iframe src="http://www.beecardia.com/viewer?&record_type=2&record_url=${study.externalStorage}#zoomX=25&zoomY=10&baselineCorrection=true&smooth=true&timePosition=16375"
-            width="100%" height="500" frameborder="0">
-
-    </iframe>
+    <table>
+        <th>Date</th>
+        <th>Study number</th>
+        <c:forEach items="${studies}" var="study">
+            <tr>
+                <td><a href="${study.id}.form"> ${study.studyDate}</a></td>
+                <td>Study id: ${study.id} </td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 <%@ include file="/WEB-INF/template/footer.jsp" %>

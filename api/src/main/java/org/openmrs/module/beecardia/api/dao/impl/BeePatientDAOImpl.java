@@ -42,6 +42,14 @@ public class BeePatientDAOImpl implements BeePatientDAO {
     }
 
     @Override
+    public BeePatient getByOpenmrsId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        BeePatient result = (BeePatient) session.createCriteria(BeePatient.class)
+                .add(Restrictions.eq("openmrsPatientId", id)).uniqueResult();
+        return result;
+    }
+
+    @Override
     public BeePatient getByHashId(String hashId) {
         Session session = sessionFactory.getCurrentSession();
         BeePatient result = (BeePatient) session.createCriteria(BeePatient.class)

@@ -39,6 +39,11 @@ public class BeePatientServiceImpl extends BaseOpenmrsService implements BeePati
     }
 
     @Override
+    public BeePatient getByOpenmrsId(int id) {
+        return dao.getByOpenmrsId(id);
+    }
+
+    @Override
     public BeePatient getByHashId(String hashId) {
         return dao.getByHashId(hashId);
     }
