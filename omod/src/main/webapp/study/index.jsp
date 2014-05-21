@@ -4,17 +4,11 @@
     <a href="patientDashboard.form">Patient dashboard</a>
 </div>
 </br>
-<div id="patientHeader" class="boxHeader">
-    <div id="patientHeaderPatientName">
-        ${patient.givenName} ${patient.middleName} ${patient.familyName} ${patient.gender}
-    </div>
-    <div id="patientHeaderPreferredIdentifier">
-        <span class="patientHeaderPatientIdentifier">
-            <span id="patientHeaderPatientIdentifierType">OpenMRS ID:</span>
-            ${patient.patientIdentifier}
-        </span>
-    </div>
+<div class="boxHeader">
+    ${openmrsPatient.givenName} ${openmrsPatient.middleName} ${openmrsPatient.familyName} ${openmrsPatient.gender} <span
+        id="patientHeaderPatientIdentifierType">OpenMRS ID:</span> ${openmrsPatient.patientIdentifier}
 </div>
+</br>
 
 <div class="boxHeader">Studies</div>
 <div class="box">

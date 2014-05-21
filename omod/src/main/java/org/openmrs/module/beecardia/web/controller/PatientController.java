@@ -1,9 +1,6 @@
 package org.openmrs.module.beecardia.web.controller;
 
 import org.openmrs.Patient;
-import org.openmrs.PatientIdentifier;
-import org.openmrs.Person;
-import org.openmrs.PersonName;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.beecardia.api.enity.BeePatient;
 import org.openmrs.module.beecardia.api.enity.BeeStudy;
@@ -37,21 +34,16 @@ public class PatientController {
             for (BeePatient beeP : beePatients) {
                 if (p.getId() == beeP.getOpenmrsPatientId()) {
                     map.put(p, beeP);
-                } else {
-                    Person person = new Person();
-                    person.addName(new PersonName("-", "-", "-"));
-                    Patient newPatient = new Patient(person);
-                    PatientIdentifier identifier = new PatientIdentifier();
-                    identifier.setIdentifier("-");
-
-                    newPatient.addIdentifier(identifier);
-                    map.put(newPatient, beeP);
                 }
+            }
+            if (map.containsKey(p)) {
+                beePatients.remove(map.get(p));
             }
         }
 
         model.put("openmrsPatient", Context.getPatientService().getPatient(patientId));
         model.put("map", map);
+        model.put("beePatients", beePatients);
 
         return "module/beecardia/patient/index";
     }
@@ -83,7 +75,7 @@ public class PatientController {
 
         Patient patient = Context.getPatientService().getPatient(patientId);
         BeePatientService service = Context.getService(BeePatientService.class);
-        model.addAttribute("patient", patient);
+        model.addAttribute("openmrsPatient", patient);
         model.addAttribute("studies", service.getByOpenmrsId(patientId).getBeeStudyList());
 
         return "module/beecardia/study/index";
@@ -96,7 +88,7 @@ public class PatientController {
         int patientId = study.getBeePatient().getOpenmrsPatientId();
         Patient patient = Context.getPatientService().getPatient(patientId);
         model.addAttribute("study", study);
-        model.addAttribute("patient", patient);
+        model.addAttribute("openmrsPatient", patient);
 
         return "module/beecardia/viewer";
     }
