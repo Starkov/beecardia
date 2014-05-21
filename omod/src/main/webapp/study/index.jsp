@@ -1,6 +1,9 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 <%@ include file="/WEB-INF/template/header.jsp" %>
-
+<div id="menu">
+    <a href="patientDashboard.form">Patient dashboard</a>
+</div>
+</br>
 <div id="patientHeader" class="boxHeader">
     <div id="patientHeaderPatientName">
         ${patient.givenName} ${patient.middleName} ${patient.familyName} ${patient.gender}

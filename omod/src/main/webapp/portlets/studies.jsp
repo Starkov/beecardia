@@ -1,6 +1,5 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 
-Hello
 <div class="boxHeader">Study</div>
 <div class="box">
     <a href="module/beecardia/patient/<%= request.getParameter("patientId")%>/study/index.form">Show studies</a>

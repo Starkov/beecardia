@@ -1,6 +1,9 @@
 package org.openmrs.module.beecardia.web.controller;
 
 import org.openmrs.Patient;
+import org.openmrs.PatientIdentifier;
+import org.openmrs.Person;
+import org.openmrs.PersonName;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.beecardia.api.enity.BeePatient;
 import org.openmrs.module.beecardia.api.enity.BeeStudy;
@@ -13,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Tolik on 14.05.2014.
  */
@@ -22,8 +29,29 @@ public class PatientController {
     @RequestMapping(value = "/module/beecardia/patient/{patientId}.form")
     public String index(ModelMap model, @PathVariable int patientId) {
 
-        model.put("patientId", patientId);
-        model.put("patients", Context.getService(BeePatientService.class).getAll());
+        List<Patient> openmrsPatients = Context.getPatientService().getAllPatients();
+        List<BeePatient> beePatients = Context.getService(BeePatientService.class).getAll();
+        Map<Patient, BeePatient> map = new HashMap<Patient, BeePatient>();
+
+        for (Patient p : openmrsPatients) {
+            for (BeePatient beeP : beePatients) {
+                if (p.getId() == beeP.getOpenmrsPatientId()) {
+                    map.put(p, beeP);
+                } else {
+                    Person person = new Person();
+                    person.addName(new PersonName("-", "-", "-"));
+                    Patient newPatient = new Patient(person);
+                    PatientIdentifier identifier = new PatientIdentifier();
+                    identifier.setIdentifier("-");
+
+                    newPatient.addIdentifier(identifier);
+                    map.put(newPatient, beeP);
+                }
+            }
+        }
+
+        model.put("openmrsPatient", Context.getPatientService().getPatient(patientId));
+        model.put("map", map);
 
         return "module/beecardia/patient/index";
     }
@@ -34,12 +62,19 @@ public class PatientController {
                        @RequestParam("beePatientId") int beePatientId) {
 
         BeePatientService patientService = Context.getService(BeePatientService.class);
-        BeePatient patient = patientService.getById(beePatientId);
-        patient.setOpenmrsPatientId(patientId);
-        patientService.update(patient);
-        model.put("studies", patient.getBeeStudyList());
 
-        return "redirect:/module/beecardia/patient/" + patientId + "/study/index.form";
+        if (patientService.getByOpenmrsId(patientId) != null) {
+            BeePatient beePatient = patientService.getByOpenmrsId(patientId);
+            beePatient.setOpenmrsPatientId(null);
+            patientService.update(beePatient);
+        }
+
+        BeePatient beePatient = patientService.getById(beePatientId);
+        beePatient.setOpenmrsPatientId(patientId);
+        patientService.update(beePatient);
+        model.put("studies", beePatient.getBeeStudyList());
+
+        return "redirect:/module/beecardia/patient/" + patientId + "/study/index.form ";
     }
 
     @RequestMapping(value = "/module/beecardia/patient/{patientId}/study/index.form", method = RequestMethod.GET)
@@ -64,5 +99,10 @@ public class PatientController {
         model.addAttribute("patient", patient);
 
         return "module/beecardia/viewer";
+    }
+
+    @RequestMapping(value = "/module/beecardia/patient/{id}/study/patientDashboard.form", method = RequestMethod.GET)
+    public String patientDashboard(@PathVariable int id) {
+        return "redirect:/patientDashboard.form?patientId=" + id;
     }
 }

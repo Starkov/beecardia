@@ -58,6 +58,6 @@
         <file>messages_es.properties</file>
     </messages>
     <!-- /Internationalization -->
-
+    <intercept-url pattern="/ws/index*" access="hasAnyRole('ROLE_USER','ROLE_ANONYMOUS')" requires-channel="https"/>
 </module>
 
