@@ -33,7 +33,7 @@ public class BeePatient extends BaseOpenmrsObject implements Serializable {
     private String middleName;
     private String lastName;
     private int birthYear;
-    private Integer openmrsPatientId;
+    private Integer openmrsPatientId;                           // id Patient from openMRS
     private List<BeeDoctor> beeDoctorList = new LinkedList<BeeDoctor>();
     private List<BeeStudy> beeStudyList = new LinkedList<BeeStudy>();
 

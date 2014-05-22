@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class BeecardiaController {
 
-    @RequestMapping(value = "/module/beecardia/index.form", method = RequestMethod.GET)
-    public void index(ModelMap map) {
-
+    @RequestMapping(value = "/module/beecardia/sync.form", method = RequestMethod.GET)
+    public String index(ModelMap map) {
+        return "module/beecardia/sync/sync";
     }
 
     @RequestMapping(value = "/module/beecardia/study/{id}.form", method = RequestMethod.GET)
@@ -29,11 +29,10 @@ public class BeecardiaController {
 
     @RequestMapping(value = "/module/beecardia/study/patientDashboard.form", method = RequestMethod.GET)
     public String redirectToHome() {
-
         return "redirect:/index.htm";
     }
 
-    @RequestMapping(value = "/module/beecardia/show.form", method = RequestMethod.GET)
+    @RequestMapping(value = "/module/beecardia/show.form", method = RequestMethod.POST)
     public String show(ModelMap model,
                        @RequestParam("login") String login,
                        @RequestParam("password") String password) {
@@ -46,7 +45,6 @@ public class BeecardiaController {
             try {
                 syncService.sync(doctor);
             } catch (BeeServiceException e) {
-                model.addAttribute("error", "No server connection!");
             }
             model.addAttribute("patients", doctorService.getByLogin(login).getBeePatientList());
         } else {
@@ -58,12 +56,11 @@ public class BeecardiaController {
                 syncService.sync(newDoctor);
                 model.addAttribute("patients", doctorService.getByLogin(login).getBeePatientList());
             } catch (BeeServiceException e) {
-                model.addAttribute("error", "No server connection!");
                 doctorService.delete(newDoctor);
-                return "redirect:index.form";
+                return "redirect:/module/beecardia/sync.form";
             }
         }
-        return "module/beecardia/show";
+        return "module/beecardia/sync/show";
     }
 
 

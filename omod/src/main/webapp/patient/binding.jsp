@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/template/header.jsp" %>
 
 <div id="menu">
-    <a href="${openmrsPatient.id}/study/patientDashboard.form">Patient dashboard</a>
+    <a href="study/patientDashboard.form">Patient dashboard</a>
 </div>
 </br>
 <div class="boxHeader">
@@ -22,8 +22,8 @@
         <th>Binding</th>
         <c:forEach items="${beePatients}" var="patient">
             <tr>
-                <form method="get" action="${openmrsPatient.id}/bind.form">
-                    <input type="hidden" name="patientId" value="${openmrsPatient.id}"/>
+                <form method="get" action="bind.form">
+                <input type="hidden" name="patientId" value="${openmrsPatient.id}"/>
                     <input type="hidden" name="beePatientId" value="${patient.id}"/>
                     <td>${patient.name}</td>
                     <td>${patient.firstName}</td>

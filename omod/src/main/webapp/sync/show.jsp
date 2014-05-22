@@ -20,11 +20,4 @@
     </c:forEach>
 </c:forEach>
 
-
-<script type="text/javascript">
-    //Подсветка по клику и при наведении мышки на ряд, множественный выбор по клику разрешен
-    highlightTableRows("myTable", "hoverRow", "clickedRow");
-
-</script>
-
 <%@ include file="/WEB-INF/template/footer.jsp" %>

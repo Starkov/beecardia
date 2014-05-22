@@ -22,10 +22,6 @@
 
     <!-- Adds link to admin page -->
     <extension>
-        <point>org.openmrs.admin.list</point>
-        <class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.AdminList</class>
-    </extension>
-    <extension>
         <point>org.openmrs.gutter.tools</point>
         <class>org.openmrs.module.beecardia.extension.html.GutterListExt</class>
     </extension>
@@ -58,6 +54,6 @@
         <file>messages_es.properties</file>
     </messages>
     <!-- /Internationalization -->
-    <intercept-url pattern="**/module/beecardia/index.form" access="permitAll" requires-channel="https"/>
+    <intercept-url pattern="/module/beecardia" access="permitAll" requires-channel="https"/>
 </module>
 

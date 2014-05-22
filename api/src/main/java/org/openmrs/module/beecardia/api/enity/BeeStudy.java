@@ -25,9 +25,9 @@ import java.util.Date;
 public class BeeStudy extends BaseOpenmrsObject implements Serializable {
 
     private Integer id;
-    private Date studyDate;
+    private Date studyDate;            // This is date of study(record ECG)
     private String studyHashId;
-    private String externalStorage;
+    private String externalStorage;    // This is link to external storage for study(record ECG)
     private BeePatient beePatient;
 
     public BeeStudy() {

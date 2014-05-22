@@ -7,8 +7,8 @@
 </br>
 <div class="boxHeader">Manage</div>
 <div class="box">
-    <a href="module/beecardia/patient/<%= request.getParameter("patientId")%>.form">
-        Binding this patient to Beecardia patient
+    <a href="module/beecardia/patient/<%= request.getParameter("patientId")%>/binding.form">
+    Binding this patient to Beecardia patient
     </a>
 </div>
 

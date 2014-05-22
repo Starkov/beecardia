@@ -23,7 +23,7 @@ import java.util.Map;
 @Controller
 public class PatientController {
 
-    @RequestMapping(value = "/module/beecardia/patient/{patientId}.form")
+    @RequestMapping(value = "/module/beecardia/patient/{patientId}/binding.form")
     public String index(ModelMap model, @PathVariable int patientId) {
 
         List<Patient> openmrsPatients = Context.getPatientService().getAllPatients();
@@ -45,7 +45,7 @@ public class PatientController {
         model.put("map", map);
         model.put("beePatients", beePatients);
 
-        return "module/beecardia/patient/index";
+        return "module/beecardia/patient/binding";
     }
 
     @RequestMapping(value = "/module/beecardia/patient/{patientId}/bind.form", method = RequestMethod.GET)
@@ -72,12 +72,14 @@ public class PatientController {
     @RequestMapping(value = "/module/beecardia/patient/{patientId}/study/index.form", method = RequestMethod.GET)
     public String studies(ModelMap model,
                           @PathVariable int patientId) {
-
-        Patient patient = Context.getPatientService().getPatient(patientId);
-        BeePatientService service = Context.getService(BeePatientService.class);
-        model.addAttribute("openmrsPatient", patient);
-        model.addAttribute("studies", service.getByOpenmrsId(patientId).getBeeStudyList());
-
+        try {
+            Patient patient = Context.getPatientService().getPatient(patientId);
+            BeePatientService service = Context.getService(BeePatientService.class);
+            model.addAttribute("openmrsPatient", patient);
+            model.addAttribute("studies", service.getByOpenmrsId(patientId).getBeeStudyList());
+        } catch (Exception e) {
+            return "redirect:/module/beecardia/patient/{patientId}/binding.form";
+        }
         return "module/beecardia/study/index";
     }
 

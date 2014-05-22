@@ -5,10 +5,10 @@
 
 <div class="boxHeader">Beecardia</div>
 <div class="box">
-    <form action="show.form" method="GET">
+    <form action="show.form" method="POST">
         <table>
             <tr>
-                <td>Login:</td>
+            <td>Login:</td>
                 <td><input type="text" name="login"></td>
             </tr>
             <tr>

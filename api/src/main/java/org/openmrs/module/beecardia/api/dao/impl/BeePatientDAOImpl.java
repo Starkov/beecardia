@@ -65,7 +65,6 @@ public class BeePatientDAOImpl implements BeePatientDAO {
             doctor.getBeePatientList().add(beePatient);
             session.update(doctor);
         }
-
     }
 
     @Override
