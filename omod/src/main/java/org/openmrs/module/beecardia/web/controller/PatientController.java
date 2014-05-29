@@ -85,13 +85,15 @@ public class PatientController {
 
     @RequestMapping(value = "/module/beecardia/patient/{patientId}/study/{studyId}", method = RequestMethod.GET)
     public String viewer(@PathVariable("studyId") int id, ModelMap model) {
-
-        BeeStudy study = Context.getService(BeeStudyService.class).getById(id);
-        int patientId = study.getBeePatient().getOpenmrsPatientId();
-        Patient patient = Context.getPatientService().getPatient(patientId);
-        model.addAttribute("study", study);
-        model.addAttribute("openmrsPatient", patient);
-
+        try {
+            BeeStudy study = Context.getService(BeeStudyService.class).getById(id);
+            int patientId = study.getBeePatient().getOpenmrsPatientId();
+            Patient patient = Context.getPatientService().getPatient(patientId);
+            model.addAttribute("study", study);
+            model.addAttribute("openmrsPatient", patient);
+        } catch (Exception e) {
+            return "redirect:/patientDashboard.form?patientId=" + id;
+        }
         return "module/beecardia/viewer";
     }
 

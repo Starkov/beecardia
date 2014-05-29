@@ -29,7 +29,7 @@ public class BeecardiaController {
 
     @RequestMapping(value = "/module/beecardia/study/patientDashboard.form", method = RequestMethod.GET)
     public String redirectToHome() {
-        return "redirect:/index.htm";
+        return "redirect:/findPatient.htm";
     }
 
     @RequestMapping(value = "/module/beecardia/show.form", method = RequestMethod.POST)
